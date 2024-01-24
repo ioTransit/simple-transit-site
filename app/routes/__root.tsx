@@ -4,15 +4,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { Button } from "~/components/ui/button";
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 
 import { getAllRoutes } from "~/models/routes.server";
 import { GoTriangleLogo } from "~/images";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader() {
   const _routes = await getAllRoutes();
 
   return json({ routes: _routes });
@@ -36,23 +35,7 @@ export default function RootTemplate() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="relative mt-2">
               {loaderData.routes.map((el) => (
-                <DropdownMenuItem className="truncate">
-                  <Link className="w-full" to={`routes/${el.routeShortName}`}>
-                    {el.routeLongName}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <div className="flex items-end ">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <span className="hover:text-blue-400">Routes</span>{" "}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="relative mt-2">
-              {loaderData.routes.map((el) => (
-                <DropdownMenuItem className="truncate">
+                <DropdownMenuItem className="truncate" key={el.routeId}>
                   <Link className="w-full" to={`routes/${el.routeShortName}`}>
                     {el.routeLongName}
                   </Link>

@@ -5,8 +5,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/gtfs.js",
-    "app/load.js",
-    "app/config.js"
+    "app/load.ts",
+    "gtfs/config.js"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
