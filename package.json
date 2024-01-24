@@ -18,6 +18,7 @@
     "pretest:e2e:run": "npm run build",
     "test:e2e:run": "cross-env PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",
     "typecheck": "tsc && tsc -p cypress",
+    "drizzle:pull": "drizzle-kit introspect:sqlite --config=drizzle/config.ts",
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
   },
   "prettier": {},
@@ -27,6 +28,7 @@
     "/public/build"
   ],
   "dependencies": {
+    "@libsql/client": "0.4.0-pre.7",
     "@prisma/client": "^4.16.2",
     "@remix-run/css-bundle": "*",
     "@remix-run/node": "*",
@@ -34,6 +36,7 @@
     "@remix-run/serve": "*",
     "bcryptjs": "^2.4.3",
     "bun": "^1.0.25",
+    "drizzle-orm": "^0.29.3",
     "gtfs": "^4.6.0",
     "isbot": "^3.7.0",
     "react": "^18.2.0",
@@ -59,6 +62,7 @@
     "cookie": "^0.5.0",
     "cross-env": "^7.0.3",
     "cypress": "^13.3.2",
+    "drizzle-kit": "^0.20.13",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
