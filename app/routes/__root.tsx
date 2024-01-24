@@ -43,7 +43,9 @@ export default function RootTemplate() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Outlet />
+      <div className="w-full m-20">
+        <Outlet />
+      </div>
     </div>
   );
 }
