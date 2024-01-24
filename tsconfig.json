@@ -5,8 +5,7 @@
     "**/*.ts",
     "**/*.tsx",
     "app/gtfs.js",
-    "app/load.ts",
-    "gtfs/config.js"
+    "app/load.js"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
@@ -14,7 +13,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2020",
@@ -26,6 +25,7 @@
       "~/*": ["./app/*"]
     },
     "skipLibCheck": true,
+    "outDir": "dist",
 
     // Remix takes care of building everything in `remix build`.
     "noEmit": true
