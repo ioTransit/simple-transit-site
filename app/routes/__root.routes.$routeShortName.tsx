@@ -3,6 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { eq } from "drizzle-orm";
 import { db } from "drizzle/config";
 import { routes } from "drizzle/schema";
+import { getAllRoutes } from "~/models/routes.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { routeShortName } = params;
@@ -13,10 +14,15 @@ export async function loader({ params }: LoaderFunctionArgs) {
     .where(eq(routes.routeShortName, routeShortName))
     .limit(1);
 
-  return json({ route });
+  const _routes = await getAllRoutes();
+  return json({ route, allRoutes: _routes });
 }
 
 export default function RootRouteTemplate() {
   const loaderData = useLoaderData<typeof loader>();
-  return <div>{loaderData.route.routeLongName}</div>;
+  return (
+    <div className="px-12">
+      <h1 className="text-3xl font-bold">{loaderData.route.routeLongName}</h1>
+    </div>
+  );
 }
