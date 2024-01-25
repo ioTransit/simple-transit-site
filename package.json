@@ -2,7 +2,6 @@
   "name": "transit-agency-site-4f17",
   "private": true,
   "sideEffects": false,
-  "type": "module",
   "scripts": {
     "build": "remix build",
     "dev": "remix dev -c \"npm run dev:serve\"",
@@ -14,7 +13,7 @@
     "start": "remix-serve ./build/index.js",
     "start:mocks": "binode --require ./mocks -- @remix-run/serve:remix-serve ./build/index.js",
     "test": "vitest",
-    "gtfs": "tsx ./app/load.js",
+    "gtfs": "tsx ./app/gtfs/index.ts",
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
     "pretest:e2e:run": "npm run build",
     "test:e2e:run": "cross-env PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",

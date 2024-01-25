@@ -39,6 +39,25 @@ export default defineConfig({
             label: "Body",
             isBody: true,
           },
+          {
+            type: "object",
+            name: "timepoint",
+            label: "Timepoint",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Timepoint Name",
+              },
+              {
+                type: "string",
+                name: "color",
+                label: "Timepoint Color",
+                options: ["red", "blue"],
+              },
+            ],
+          },
         ],
       },
       {
