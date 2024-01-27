@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+
 import { getAllRoutes } from "~/models/routes.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -10,7 +11,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function RouteRootTemplat() {
   const loaderData = useLoaderData<typeof loader>();
   return (
-    <div className="flex w-full ">
+    <div className="flex w-full overflow-hidden">
       <div className="w-44">
         <ul>
           {loaderData.allRoutes.map((el) => (

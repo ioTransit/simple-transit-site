@@ -172,11 +172,12 @@ model deadheads {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model directions {
+  id        String   @id @default(cuid())
   route_id     String
   direction_id Int?
   direction    String
 
-  @@id([route_id, direction_id])
+  // @@id([route_id, direction_id])
   @@ignore
 }
 
@@ -192,25 +193,27 @@ model fare_attributes {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model fare_leg_rules {
+  id        String   @id @default(cuid())
   leg_group_id    String?
   network_id      String?
   from_area_id    String?
   to_area_id      String?
   fare_product_id String
 
-  @@id([network_id, from_area_id, to_area_id, fare_product_id])
+  // @@id([network_id, from_area_id, to_area_id, fare_product_id])
   @@ignore
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model fare_products {
+  id        String   @id @default(cuid())
   fare_product_id   String
   fare_product_name String?
   fare_media_id     String?
   amount            Float
   currency          String
 
-  @@id([fare_product_id, fare_media_id])
+  // @@id([fare_product_id, fare_media_id])
   @@ignore
 }
 
@@ -227,6 +230,7 @@ model fare_rules {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model fare_transfer_rules {
+  id        String   @id @default(cuid())
   from_leg_group_id   String?
   to_leg_group_id     String?
   transfer_count      Int?
@@ -236,7 +240,7 @@ model fare_transfer_rules {
   fare_transfer_type  Int
   fare_product_id     String?
 
-  @@id([from_leg_group_id, to_leg_group_id, transfer_count, duration_limit, fare_product_id])
+  // @@id([from_leg_group_id, to_leg_group_id, transfer_count, duration_limit, fare_product_id])
   @@ignore
 }
 
@@ -629,6 +633,7 @@ model timetables {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model transfers {
+  id        String   @id @default(cuid())
   from_stop_id      String?
   to_stop_id        String?
   from_route_id     String?
@@ -638,12 +643,13 @@ model transfers {
   transfer_type     Int?
   min_transfer_time Int?
 
-  @@id([from_stop_id, to_stop_id, from_route_id, to_route_id, from_trip_id, to_trip_id])
+  // @@id([from_stop_id, to_stop_id, from_route_id, to_route_id, from_trip_id, to_trip_id])
   @@ignore
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model translations {
+    id        String   @id @default(cuid())
   table_name    String
   field_name    String
   language      String
@@ -652,7 +658,7 @@ model translations {
   record_sub_id String?
   field_value   String?
 
-  @@id([table_name, field_name, language, record_id, record_sub_id, field_value])
+ // @@id([table_name, field_name, language, record_id, record_sub_id, field_value])
   @@ignore
 }
 

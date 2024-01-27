@@ -39,25 +39,44 @@ export default defineConfig({
             label: "Body",
             isBody: true,
           },
-          {
-            type: "object",
-            name: "timepoint",
-            label: "Timepoint",
-            list: true,
-            fields: [
-              {
-                type: "string",
-                name: "name",
-                label: "Timepoint Name",
-              },
-              {
-                type: "string",
-                name: "color",
-                label: "Timepoint Color",
-                options: ["red", "blue"],
-              },
-            ],
-          },
+          // {
+          //   type: "object",
+          //   name: "direction",
+          //   label: "Direction",
+          //   list: true,
+          //   ui: {
+          //     itemProps: (item) => {
+          //       return { label: item.label };
+          //     },
+          //   },
+          //   fields: [
+          //     { type: "string", name: "label", label: "Direction" },
+          //     {
+          //       type: "object",
+          //       name: "timepoint",
+          //       label: "Timepoint",
+          //       list: true,
+          //       ui: {
+          //         itemProps: (item) => {
+          //           return { label: item.name };
+          //         },
+          //       },
+          //       fields: [
+          //         {
+          //           type: "string",
+          //           name: "name",
+          //           label: "Timepoint Name",
+          //         },
+          //         {
+          //           type: "string",
+          //           name: "color",
+          //           label: "Timepoint Color",
+          //           options: ["red", "blue"],
+          //         },
+          //       ],
+          //     },
+          //   ],
+          // },
         ],
       },
       {

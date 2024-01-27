@@ -1,39 +1,32 @@
 import { writeFile } from "fs/promises";
 
 import { importGtfs } from "gtfs";
+// @ts-expect-error no types
+import gtfsToHtml from "gtfs-to-html";
 
-import { getStopTimes } from "~/models/stopsTimes.server";
-
+import { gtfsConfig } from "../config";
 import { getAllRoutes } from "../models/routes.server";
-
-import { config } from "./config";
 
 export const load = async () => {
   try {
-    await importGtfs(config);
+    await importGtfs(gtfsConfig);
     const routes = await getAllRoutes();
     console.log(routes);
+    gtfsToHtml(gtfsConfig)
+      .then(() => {
+        console.log("HTML Generation Successful");
+        process.exit();
+      })
+      // @ts-expect-error no types
+      .catch((err) => {
+        console.error(err);
+        process.exit(1);
+      });
     for (const route of routes) {
-      try {
-        const stopTimes = await getStopTimes(route.routeId);
-        if (!stopTimes) continue;
-        const stopTimeFields = stopTimes.map((stopTime) => {
-          return `  - name: ${stopTime.stopName}\n    color: red`;
-        });
-        await writeFile(
-          `routes/${route.routeShortName}.md`,
-          [
-            "---",
-            "timepoint:",
-            ...stopTimeFields,
-            "---",
-            "",
-            "This is where the body goes",
-          ].join("\n"),
-        );
-      } catch (e) {
-        console.error(e);
-      }
+      await writeFile(
+        `routes/${route.routeShortName}.md`,
+        `\nThis is where the text goes`,
+      );
     }
   } catch (error) {
     console.error(error);

@@ -1,15 +1,15 @@
+import type { MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import type { MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/node";
-
-import { getAllRoutes } from "~/models/routes.server";
 import { GoTriangleLogo } from "~/images";
+import { getAllRoutes } from "~/models/routes.server";
 
 export async function loader() {
   const _routes = await getAllRoutes();
@@ -23,7 +23,7 @@ export default function RootTemplate() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <div className="w-full">
+    <div className="w-screen">
       <div className="w-full flex p-8 gap-8">
         <Link to="/">
           <GoTriangleLogo height={90} />
@@ -35,7 +35,7 @@ export default function RootTemplate() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="relative mt-2">
               {loaderData.routes.map((el) => (
-                <DropdownMenuItem className="truncate" key={el.routeId}>
+                <DropdownMenuItem className="truncate" key={el.routeId} asChild>
                   <Link className="w-full" to={`routes/${el.routeShortName}`}>
                     {el.routeLongName}
                   </Link>
