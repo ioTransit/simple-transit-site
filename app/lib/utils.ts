@@ -68,16 +68,17 @@ export const getFiles = (date: number, routeShortName: string) => {
   const folder = `html/${currentFolder.startDate}-${currentFolder.endDate}`;
   const files = fs.readdirSync(folder);
   return files
-    .filter((el) => el.includes(routeShortName))
     .map((el) => {
       const contents = readFileToString(`${folder}/${el}`);
-      const [, , direction, service] = el.split("_");
+      const [, routeShortName, direction, service] = el.split("_");
       const obj = {
         fileName: el,
+        routeShortName,
         direction,
         contents,
         service: service.replace(".html", ""),
       };
       return obj;
-    });
+    })
+    .filter((el) => el.routeShortName === routeShortName);
 };

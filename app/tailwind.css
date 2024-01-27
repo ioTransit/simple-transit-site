@@ -74,6 +74,16 @@
     @apply bg-background text-foreground;
   }
 }
+.timetable-page-label {
+  @apply flex gap-3;
+}
+.route-color-swatch-large {
+  @apply px-2 py-1 rounded-md;
+}
+.stop-header,
+.stop-name {
+  @apply w-36;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
