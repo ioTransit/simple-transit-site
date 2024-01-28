@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import { sql } from "drizzle-orm";
 import {
   sqliteTable,
@@ -26,7 +27,9 @@ export const prismaMigrations = sqliteTable("_prisma_migrations", {
 export const user = sqliteTable(
   "User",
   {
-    id: text("id").primaryKey().notNull(),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
     email: text("email").notNull(),
     createdAt: numeric("createdAt")
       .default(sql`(CURRENT_TIMESTAMP)`)
@@ -1097,4 +1100,3 @@ export const runsPieces = sqliteTable(
     };
   },
 );
-
