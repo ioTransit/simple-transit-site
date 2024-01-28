@@ -52,7 +52,6 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function RootRouteTemplate() {
   const loaderData = useLoaderData<typeof loader>();
   const [dow, setDow] = useState<string>(loaderData.service);
-  console.log(loaderData);
   const [direction, setDirection] = useState(
     Object.keys(loaderData.directions)[0],
   );
@@ -71,7 +70,7 @@ export default function RootRouteTemplate() {
               return (
                 <Button
                   key={i}
-                  className={clsx("capitalize")}
+                  className={clsx("capitalize", dow === el && "bg-gray-500")}
                   onClick={() => setDow(el)}
                 >
                   {el}
@@ -87,6 +86,10 @@ export default function RootRouteTemplate() {
                       <Button
                         key={i}
                         onClick={() => setDirection(directionId.toString())}
+                        className={clsx(
+                          "capitalize",
+                          direction === directionId.toString() && "bg-gray-500",
+                        )}
                       >
                         {idk
                           .map((el) => {

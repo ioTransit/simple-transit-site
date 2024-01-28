@@ -11,7 +11,6 @@ export const load = async () => {
   try {
     await importGtfs(gtfsConfig);
     const routes = await getAllRoutes();
-    console.log(routes);
     gtfsToHtml(gtfsConfig)
       .then(() => {
         console.log("HTML Generation Successful");
