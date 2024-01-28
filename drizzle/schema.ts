@@ -59,7 +59,9 @@ export const password = sqliteTable(
 );
 
 export const note = sqliteTable("Note", {
-  id: text("id").primaryKey().notNull(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => createId()),
   title: text("title").notNull(),
   body: text("body").notNull(),
   createdAt: numeric("createdAt")

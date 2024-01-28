@@ -1,63 +1,63 @@
-import type { Password, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { eq } from "drizzle-orm";
 
-import { prisma } from "~/db.server";
+import { db } from "drizzle/config";
+import { password, user } from "drizzle/schema";
 
-export type { User } from "@prisma/client";
-
-export async function getUserById(id: User["id"]) {
-  return prisma.user.findUnique({ where: { id } });
+export async function getUserById(id: string) {
+  const [_user] = await db.select().from(user).where(eq(user.id, id)).limit(1);
+  return _user;
 }
 
-export async function getUserByEmail(email: User["email"]) {
-  return prisma.user.findUnique({ where: { email } });
+export async function getUserByEmail(email: string) {
+  const [_user] = await db.select().from(user).where(eq(user.email, email));
+  return _user;
 }
 
-export async function createUser(email: User["email"], password: string) {
-  const hashedPassword = await bcrypt.hash(password, 10);
+export async function createUser(email: string, _password: string) {
+  const hashedPassword = await bcrypt.hash(_password, 10);
 
-  return prisma.user.create({
-    data: {
-      email,
-      password: {
-        create: {
-          hash: hashedPassword,
+  return await db.transaction(async (tx) => {
+    const [createdUser] = await tx
+      .insert(user)
+      .values([
+        {
+          email,
+          updatedAt: new Date().toLocaleDateString(),
         },
-      },
-    },
+      ])
+      .returning({ id: user.id, email: user.email });
+    await tx.insert(password).values({
+      userId: createdUser.id,
+      hash: hashedPassword,
+    });
+    return createdUser;
   });
 }
 
-export async function deleteUserByEmail(email: User["email"]) {
-  return prisma.user.delete({ where: { email } });
+export async function deleteUserByEmail(email: string) {
+  return await db.delete(user).where(eq(user.email, email));
 }
 
-export async function verifyLogin(
-  email: User["email"],
-  password: Password["hash"],
-) {
-  const userWithPassword = await prisma.user.findUnique({
-    where: { email },
-    include: {
-      password: true,
-    },
-  });
+export async function verifyLogin(email: string, _password: string) {
+  const [userWithPassword] = await db
+    .select()
+    .from(user)
+    .leftJoin(password, eq(password.userId, user.id))
+    .where(eq(user.email, email));
 
-  if (!userWithPassword || !userWithPassword.password) {
+  if (!userWithPassword || !userWithPassword.Password) {
     return null;
   }
 
   const isValid = await bcrypt.compare(
-    password,
-    userWithPassword.password.hash,
+    _password,
+    userWithPassword.Password.hash,
   );
 
   if (!isValid) {
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password: _password, ...userWithoutPassword } = userWithPassword;
-
-  return userWithoutPassword;
+  return userWithPassword.User;
 }

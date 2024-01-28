@@ -27,33 +27,6 @@ async function seed() {
       hash: hashedPassword,
     });
   });
-  // const user = await prisma.user.create({
-  //   data: {
-  //     email,
-  //     password: {
-  //       create: {
-  //         hash: hashedPassword,
-  //       },
-  //     },
-  //   },
-  // });
-  //
-  // await prisma.note.create({
-  //   data: {
-  //     title: "My first note",
-  //     body: "Hello, world!",
-  //     userId: user.id,
-  //   },
-  // });
-  //
-  // await prisma.note.create({
-  //   data: {
-  //     title: "My second note",
-  //     body: "Hello, world!",
-  //     userId: user.id,
-  //   },
-  // });
-  //
   console.log(`Database has been seeded. 🌱`);
 }
 

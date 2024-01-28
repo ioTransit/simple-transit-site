@@ -1,52 +1,33 @@
-import type { User, Note } from "@prisma/client";
+import { eq } from "drizzle-orm";
 
-import { prisma } from "~/db.server";
+import { db } from "drizzle/config";
+import { note } from "drizzle/schema";
+import { dbDate } from "~/utils";
 
-export function getNote({
-  id,
-  userId,
-}: Pick<Note, "id"> & {
-  userId: User["id"];
-}) {
-  return prisma.note.findFirst({
-    select: { id: true, body: true, title: true },
-    where: { id, userId },
-  });
+export async function getNote({ id }: { id: string }) {
+  const [note] = await db.select().from(note).where(eq(note.id, id)).limit(1);
+  return note;
 }
 
-export function getNoteListItems({ userId }: { userId: User["id"] }) {
-  return prisma.note.findMany({
-    where: { userId },
-    select: { id: true, title: true },
-    orderBy: { updatedAt: "desc" },
-  });
+export function getNoteListItems() {
+  return db
+    .select({ id: note.id, title: note.title })
+    .from(note)
+    .orderBy(note.createdAt);
 }
 
 export function createNote({
   body,
   title,
   userId,
-}: Pick<Note, "body" | "title"> & {
-  userId: User["id"];
+}: {
+  body: string;
+  title: string;
+  userId: string;
 }) {
-  return prisma.note.create({
-    data: {
-      title,
-      body,
-      user: {
-        connect: {
-          id: userId,
-        },
-      },
-    },
-  });
+  return db.insert(note).values([{ body, title, userId, updatedAt: dbDate() }]);
 }
 
-export function deleteNote({
-  id,
-  userId,
-}: Pick<Note, "id"> & { userId: User["id"] }) {
-  return prisma.note.deleteMany({
-    where: { id, userId },
-  });
+export function deleteNote({ id }: { id: string }) {
+  return db.delete(note).where(eq(note.id, id));
 }
