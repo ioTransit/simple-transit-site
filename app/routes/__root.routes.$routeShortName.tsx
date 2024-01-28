@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import groupBy from "lodash/groupBy";
 import { useState } from "react";
 
@@ -12,16 +12,15 @@ import { getDow, getFiles } from "~/lib/utils";
 export async function loader({ params }: LoaderFunctionArgs) {
   const { routeShortName } = params;
   if (!routeShortName) return redirect("/");
-  const [route] = await db
+  const _routes = await db
     .select()
     .from(routes)
-    .where(eq(routes.routeShortName, routeShortName))
-    .limit(1);
+    .where(eq(routes.routeShortName, routeShortName));
 
   const { dow, formattedDate } = getDow(new Date());
 
-  if (!route.routeShortName) return redirect("/");
-  const files = getFiles(formattedDate, route.routeShortName);
+  if (!_routes[0].routeShortName) return redirect("/");
+  const files = getFiles(formattedDate, _routes[0].routeShortName);
 
   const directions = await db
     .select({
@@ -31,10 +30,15 @@ export async function loader({ params }: LoaderFunctionArgs) {
     .from(trips)
     .groupBy(trips.directionId, trips.tripHeadsign)
     .orderBy(trips.tripHeadsign)
-    .where(eq(trips.routeId, route.routeId));
+    .where(
+      inArray(
+        trips.routeId,
+        _routes.map((el) => el.routeId),
+      ),
+    );
 
   return json({
-    route,
+    routes: _routes,
     dow,
     files,
     directions: groupBy(directions, "directionId"),
@@ -46,28 +50,32 @@ export default function RootRouteTemplate() {
   const [dow, setDow] = useState<string>(loaderData.dow);
   console.log(loaderData);
   const [direction, setDirection] = useState(
-    loaderData.directions[0]
-      ? loaderData.directions[0].directionId.toString()
-      : null,
+    Object.keys(loaderData.directions)[0],
   );
   return (
     <div className="flex flex-col gap-3 w-[80%]">
-      <h1 className="text-3xl font-bold">{loaderData.route.routeLongName}</h1>
+      <h1 className="text-3xl font-bold">
+        {loaderData.routes[0].routeLongName}
+      </h1>
       <div className="flex gap-3">
-        {Object.entries(loaderData.directions).map(([directionId, idk], i) => {
-          return (
-            <Button
-              key={i}
-              onClick={() => setDirection(directionId.toString())}
-            >
-              {idk
-                .map((el) => {
-                  return el.tripHeadsign;
-                })
-                .join(" / ")}
-            </Button>
-          );
-        })}
+        {Object.entries(loaderData.directions).length > 1
+          ? Object.entries(loaderData.directions).map(
+              ([directionId, idk], i) => {
+                return (
+                  <Button
+                    key={i}
+                    onClick={() => setDirection(directionId.toString())}
+                  >
+                    {idk
+                      .map((el) => {
+                        return el.tripHeadsign;
+                      })
+                      .join(" / ")}
+                  </Button>
+                );
+              },
+            )
+          : null}
       </div>
 
       {loaderData.files.map((el, i) => {

@@ -67,6 +67,7 @@ export const getFiles = (date: number, routeShortName: string) => {
   });
   const folder = `html/${currentFolder.startDate}-${currentFolder.endDate}`;
   const files = fs.readdirSync(folder);
+
   return files
     .map((el) => {
       const contents = readFileToString(`${folder}/${el}`);
@@ -80,5 +81,7 @@ export const getFiles = (date: number, routeShortName: string) => {
       };
       return obj;
     })
-    .filter((el) => el.routeShortName === routeShortName);
+    .filter(
+      (el) => el.routeShortName.toLowerCase() === routeShortName.toLowerCase(),
+    );
 };
