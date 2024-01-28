@@ -85,3 +85,14 @@ export const getFiles = (date: number, routeShortName: string) => {
       (el) => el.routeShortName.toLowerCase() === routeShortName.toLowerCase(),
     );
 };
+
+export const getService = (serviceIds: string[], dow: string) => {
+  switch (dow) {
+    case "Saturday":
+      return "sat";
+    case "Sunday":
+      return "sun";
+    default:
+      return serviceIds.includes("mon-fri") ? "mon-fri" : serviceIds[0];
+  }
+};

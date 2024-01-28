@@ -1,6 +1,6 @@
 Feed Version: UTC: 21-Dec-2023 19:06
 GTFS-to-HTML Version: 2.5.9
-Date Generated: Sat Jan 27 2024 10:55:28 GMT-0600 (Central Standard Time)
+Date Generated: Sun Jan 28 2024 09:34:07 GMT-0600 (Central Standard Time)
 Timetable Page Count: 259
 Timetable Count: 259
 Calendar Service ID Count: 582
