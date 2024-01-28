@@ -22,6 +22,7 @@ export function getDow(date: Date) {
   };
   const formattedDate = date.toLocaleDateString(
     "en-US",
+    // @ts-expect-error dates are hard
     formattedDateOptions,
   ) as string;
   const _date = new Date(formattedDate);
@@ -89,9 +90,17 @@ export const getFiles = (date: number, routeShortName: string) => {
 export const getService = (serviceIds: string[], dow: string) => {
   switch (dow) {
     case "Saturday":
-      return "sat";
+      return serviceIds.includes("sat")
+        ? "sat"
+        : serviceIds.includes("mon-fri")
+        ? "mon-fri"
+        : serviceIds[0];
     case "Sunday":
-      return "sun";
+      return serviceIds.includes("sun")
+        ? "sun"
+        : serviceIds.includes("mon-fri")
+        ? "mon-fri"
+        : serviceIds[0];
     default:
       return serviceIds.includes("mon-fri") ? "mon-fri" : serviceIds[0];
   }

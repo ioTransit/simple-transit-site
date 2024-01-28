@@ -21,3 +21,4 @@ export const serviceTypes = {
   saturday: { label: "Saturday", file: "sat" },
   sunday: { label: "Sunday", file: "sun" },
 };
+export const title = "Triangle Transit";
