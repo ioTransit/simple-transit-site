@@ -5,12 +5,15 @@ import {
   redirect,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import bbox from "@turf/bbox";
+import { lineString } from "@turf/helpers";
 import clsx from "clsx";
 import { eq } from "drizzle-orm";
+import concat from "lodash/concat";
 import groupBy from "lodash/groupBy";
 import mapboxCss from "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
-import Map from "react-map-gl"; //eslint-disable-line
+import Map, { CircleLayer, Layer, LineLayer, Source } from "react-map-gl"; //eslint-disable-line
 
 import { db } from "drizzle/config";
 import { routes } from "drizzle/schema";
@@ -35,6 +38,18 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const files = getFiles(formattedDate, _routes[0].routeShortName);
   const geojson = getGeojson(routeShortName);
 
+  const bounds = bbox(
+    lineString(
+      concat(
+        ...geojson.map((el) =>
+          el.contents.features
+            .filter((el) => el.properties?.stop_id)
+            .map((feat) => feat.geometry.coordinates),
+        ),
+      ),
+    ),
+  );
+
   const routeIds = _routes.map((el) => el.routeId);
   const [directions] = await Promise.all([getDirections(routeIds)]);
 
@@ -47,6 +62,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   return json({
     routes: _routes,
     dow,
+    bounds,
     service,
     files,
     geojson,
@@ -55,6 +71,44 @@ export async function loader({ params }: LoaderFunctionArgs) {
   });
 }
 
+const stopsStyle = (fileName: string): CircleLayer => {
+  return {
+    id: `${fileName}-stops`,
+    type: "circle",
+    paint: {
+      "circle-radius": 5,
+      "circle-color": "#007cbf",
+    },
+  };
+};
+
+const routesStyle = (fileName: string): LineLayer => {
+  return {
+    id: `${fileName}-routes`,
+    type: "line",
+    paint: {
+      "line-color": [
+        "case",
+        ["has", "route_color"],
+        ["get", "route_color"],
+        "#ffffff",
+      ],
+      "line-width": 3,
+      "line-opacity": [
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        // zoom is 5 (or less) -> circle radius will be 0px (hidden)
+        5,
+        0,
+        // zoom is 10 (or greater) -> circle radius will be 5px
+        10,
+        1,
+      ],
+    },
+  };
+};
+
 export default function RootRouteTemplate() {
   const loaderData = useLoaderData<typeof loader>();
   const [dow, setDow] = useState<string>(loaderData.service);
@@ -62,7 +116,7 @@ export default function RootRouteTemplate() {
     Object.keys(loaderData.directions)[0],
   );
 
-  // console.log(loaderData);
+  console.log(loaderData);
   return (
     <div className="flex flex-col gap-3 w-[80%] py-3">
       <h1 className="text-3xl font-bold">
@@ -71,13 +125,30 @@ export default function RootRouteTemplate() {
       <Map
         mapboxAccessToken={loaderData.mapboxAccessToken}
         initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 14,
+          bounds: loaderData.bounds as [number, number, number, number],
+          fitBoundsOptions: {
+            padding: { top: 20, bottom: 20, right: 20, left: 20 },
+          },
         }}
-        style={{ width: 600, height: 400 }}
+        style={{ width: "100%", height: 400 }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
-      />
+      >
+        {loaderData.geojson.map((el) => (
+          <Source
+            key={el.fileName}
+            id={el.fileName}
+            data={el.contents}
+            type="geojson"
+          >
+            <Layer
+              {...routesStyle(el.fileName)}
+              filter={["has", "route_id"]}
+              beforeId="road-label-small"
+            />
+            <Layer {...stopsStyle(el.fileName)} filter={["has", "stop_id"]} />
+          </Source>
+        ))}
+      </Map>
       {loaderData.files.length === 0 ? (
         <div className="flex flex-col gap-3">No files found for this route</div>
       ) : (

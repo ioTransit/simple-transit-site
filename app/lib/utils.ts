@@ -1,6 +1,7 @@
 import fs from "fs";
 
 import { type ClassValue, clsx } from "clsx";
+import { FeatureCollection, Point } from "geojson";
 import { twMerge } from "tailwind-merge";
 
 import { region, timezone } from "~/config";
@@ -95,7 +96,9 @@ export const getGeojson = (routeShortName: string) => {
       .readdirSync(`geojson/${agency}`)
       .filter((el) => el.includes(`_${routeShortName}_`));
     return files.map((el) => {
-      const contents = readFileToString(`${`geojson/${agency}`}/${el}`);
+      const contents = JSON.parse(
+        readFileToString(`${`geojson/${agency}`}/${el}`),
+      ) as FeatureCollection<Point>;
       const [, routeShortName, direction] = el.split("_");
       const obj = {
         fileName: el,
