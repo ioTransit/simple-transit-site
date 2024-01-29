@@ -24,7 +24,7 @@ export default function RootTemplate() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <div className="w-screen">
+    <div>
       <div className="w-full flex p-8 gap-8">
         <Link to="/">
           <GoTriangleLogo height={90} />
@@ -46,7 +46,7 @@ export default function RootTemplate() {
           </DropdownMenu>
         </div>
       </div>
-      <div className="flex-col mx-auto flex justify-center px-12">
+      <div className="flex-col flex justify-center px-12">
         <Outlet />
       </div>
     </div>
