@@ -1,0 +1,176 @@
+Feed Version: UTC: 21-Dec-2023 19:06
+GTFS-to-HTML Version: 2.5.9
+Date Generated: Mon Jan 29 2024 07:45:29 GMT-0600 (Central Standard Time)
+Timetable Page Count: 259
+Timetable Count: 259
+Calendar Service ID Count: 582
+Route Count: 259
+Trip Count: 4753
+Stop Count: 4835
+Source: http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip
+
+Warnings:
+No trips found for route_id=1563, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1563|0000010|1
+No timetables found for timetable_page_id=1563|0000010|1
+No trips found for route_id=1563, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1563|0000001|1
+No timetables found for timetable_page_id=1563|0000001|1
+No trips found for route_id=1563, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1563|0000010|1
+No timetables found for timetable_page_id=1563|0000010|1
+No trips found for route_id=1563, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1563|0000001|1
+No timetables found for timetable_page_id=1563|0000001|1
+No trips found for route_id=1563, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1563|0000010|0
+No timetables found for timetable_page_id=1563|0000010|0
+No trips found for route_id=1563, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1563|0000001|0
+No timetables found for timetable_page_id=1563|0000001|0
+No trips found for route_id=1563, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1563|0000010|0
+No timetables found for timetable_page_id=1563|0000010|0
+No trips found for route_id=1563, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1563|0000001|0
+No timetables found for timetable_page_id=1563|0000001|0
+No trips found for route_id=16797, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=16797|0000001|0
+No timetables found for timetable_page_id=16797|0000001|0
+No trips found for route_id=16797, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=16797|0000001|0
+No timetables found for timetable_page_id=16797|0000001|0
+No trips found for route_id=1761, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1761|0000010|1
+No timetables found for timetable_page_id=1761|0000010|1
+No trips found for route_id=1761, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1761|0000001|1
+No timetables found for timetable_page_id=1761|0000001|1
+No trips found for route_id=1761, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1761|0000010|1
+No timetables found for timetable_page_id=1761|0000010|1
+No trips found for route_id=1761, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1761|0000001|1
+No timetables found for timetable_page_id=1761|0000001|1
+No trips found for route_id=1761, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1761|0000010|0
+No timetables found for timetable_page_id=1761|0000010|0
+No trips found for route_id=1761, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1761|0000001|0
+No timetables found for timetable_page_id=1761|0000001|0
+No trips found for route_id=1761, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1761|0000010|0
+No timetables found for timetable_page_id=1761|0000010|0
+No trips found for route_id=1761, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1761|0000001|0
+No timetables found for timetable_page_id=1761|0000001|0
+No trips found for route_id=1760, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1760|0000010|1
+No timetables found for timetable_page_id=1760|0000010|1
+No trips found for route_id=1760, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1760|0000001|1
+No timetables found for timetable_page_id=1760|0000001|1
+No trips found for route_id=1760, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1760|0000010|1
+No timetables found for timetable_page_id=1760|0000010|1
+No trips found for route_id=1760, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1760|0000001|1
+No timetables found for timetable_page_id=1760|0000001|1
+No trips found for route_id=1760, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1760|0000010|0
+No timetables found for timetable_page_id=1760|0000010|0
+No trips found for route_id=1760, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1760|0000001|0
+No timetables found for timetable_page_id=1760|0000001|0
+No trips found for route_id=1760, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1760|0000010|0
+No timetables found for timetable_page_id=1760|0000010|0
+No trips found for route_id=1760, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1760|0000001|0
+No timetables found for timetable_page_id=1760|0000001|0
+No trips found for route_id=1758, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1758|0000010|1
+No timetables found for timetable_page_id=1758|0000010|1
+No trips found for route_id=1758, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1758|0000001|1
+No timetables found for timetable_page_id=1758|0000001|1
+No trips found for route_id=1758, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1758|0000010|1
+No timetables found for timetable_page_id=1758|0000010|1
+No trips found for route_id=1758, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1758|0000001|1
+No timetables found for timetable_page_id=1758|0000001|1
+No trips found for route_id=1758, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1758|0000010|0
+No timetables found for timetable_page_id=1758|0000010|0
+No trips found for route_id=1758, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1758|0000001|0
+No timetables found for timetable_page_id=1758|0000001|0
+No trips found for route_id=1758, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1758|0000010|0
+No timetables found for timetable_page_id=1758|0000010|0
+No trips found for route_id=1758, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1758|0000001|0
+No timetables found for timetable_page_id=1758|0000001|0
+No trips found for route_id=1755, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1755|0000010|1
+No timetables found for timetable_page_id=1755|0000010|1
+No trips found for route_id=1755, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1755|0000001|1
+No timetables found for timetable_page_id=1755|0000001|1
+No trips found for route_id=1755, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1755|0000010|1
+No timetables found for timetable_page_id=1755|0000010|1
+No trips found for route_id=1755, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1755|0000001|1
+No timetables found for timetable_page_id=1755|0000001|1
+No trips found for route_id=1755, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1755|0000010|0
+No timetables found for timetable_page_id=1755|0000010|0
+No trips found for route_id=1755, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1755|0000001|0
+No timetables found for timetable_page_id=1755|0000001|0
+No trips found for route_id=1755, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1755|0000010|0
+No timetables found for timetable_page_id=1755|0000010|0
+No trips found for route_id=1755, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1755|0000001|0
+No timetables found for timetable_page_id=1755|0000001|0
+No trips found for route_id=1754, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1754|0000010|1
+No timetables found for timetable_page_id=1754|0000010|1
+No trips found for route_id=1754, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1754|0000001|1
+No timetables found for timetable_page_id=1754|0000001|1
+No trips found for route_id=1754, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1754|0000010|1
+No timetables found for timetable_page_id=1754|0000010|1
+No trips found for route_id=1754, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1754|0000001|1
+No timetables found for timetable_page_id=1754|0000001|1
+No trips found for route_id=1754, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1754|0000010|0
+No timetables found for timetable_page_id=1754|0000010|0
+No trips found for route_id=1754, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1754|0000001|0
+No timetables found for timetable_page_id=1754|0000001|0
+No trips found for route_id=1754, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1754|0000010|0
+No timetables found for timetable_page_id=1754|0000010|0
+No trips found for route_id=1754, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1754|0000001|0
+No timetables found for timetable_page_id=1754|0000001|0
+No trips found for route_id=1574, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1574|0000010|1
+No timetables found for timetable_page_id=1574|0000010|1
+No trips found for route_id=1574, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1574|0000001|1
+No timetables found for timetable_page_id=1574|0000001|1
+No trips found for route_id=1574, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1574|0000010|1
+No timetables found for timetable_page_id=1574|0000010|1
+No trips found for route_id=1574, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1574|0000001|1
+No timetables found for timetable_page_id=1574|0000001|1
+No trips found for route_id=1574, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1574|0000010|0
+No timetables found for timetable_page_id=1574|0000010|0
+No trips found for route_id=1574, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1574|0000001|0
+No timetables found for timetable_page_id=1574|0000001|0
+No trips found for route_id=1574, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1574|0000010|0
+No timetables found for timetable_page_id=1574|0000010|0
+No trips found for route_id=1574, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1574|0000001|0
+No timetables found for timetable_page_id=1574|0000001|0
+No trips found for route_id=1568, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1568|0000010|1
+No timetables found for timetable_page_id=1568|0000010|1
+No trips found for route_id=1568, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1568|0000001|1
+No timetables found for timetable_page_id=1568|0000001|1
+No trips found for route_id=1568, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1568|0000010|1
+No timetables found for timetable_page_id=1568|0000010|1
+No trips found for route_id=1568, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1568|0000001|1
+No timetables found for timetable_page_id=1568|0000001|1
+No trips found for route_id=1568, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1568|0000010|0
+No timetables found for timetable_page_id=1568|0000010|0
+No trips found for route_id=1568, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1568|0000001|0
+No timetables found for timetable_page_id=1568|0000001|0
+No trips found for route_id=1568, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1568|0000010|0
+No timetables found for timetable_page_id=1568|0000010|0
+No trips found for route_id=1568, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1568|0000001|0
+No timetables found for timetable_page_id=1568|0000001|0
+No trips found for route_id=1566, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1566|0000010|1
+No timetables found for timetable_page_id=1566|0000010|1
+No trips found for route_id=1566, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1566|0000001|1
+No timetables found for timetable_page_id=1566|0000001|1
+No trips found for route_id=1566, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1566|0000010|1
+No timetables found for timetable_page_id=1566|0000010|1
+No trips found for route_id=1566, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1566|0000001|1
+No timetables found for timetable_page_id=1566|0000001|1
+No trips found for route_id=1566, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1566|0000010|0
+No timetables found for timetable_page_id=1566|0000010|0
+No trips found for route_id=1566, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1566|0000001|0
+No timetables found for timetable_page_id=1566|0000001|0
+No trips found for route_id=1566, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=1566|0000010|0
+No timetables found for timetable_page_id=1566|0000010|0
+No trips found for route_id=1566, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=1566|0000001|0
+No timetables found for timetable_page_id=1566|0000001|0
+No trips found for route_id=13514, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=13514|0000010|1
+No timetables found for timetable_page_id=13514|0000010|1
+No trips found for route_id=13514, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=13514|0000001|1
+No timetables found for timetable_page_id=13514|0000001|1
+No trips found for route_id=13514, direction_id=1, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=13514|0000010|1
+No timetables found for timetable_page_id=13514|0000010|1
+No trips found for route_id=13514, direction_id=1, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=13514|0000001|1
+No timetables found for timetable_page_id=13514|0000001|1
+No trips found for route_id=13514, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=13514|0000010|0
+No timetables found for timetable_page_id=13514|0000010|0
+No trips found for route_id=13514, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=13514|0000001|0
+No timetables found for timetable_page_id=13514|0000001|0
+No trips found for route_id=13514, direction_id=0, service_ids=["c_69911_b_81545_d_32","c_70095_b_81907_d_32"], timetable_id=13514|0000010|0
+No timetables found for timetable_page_id=13514|0000010|0
+No trips found for route_id=13514, direction_id=0, service_ids=["c_69911_b_81545_d_64","c_70095_b_81907_d_64"], timetable_id=13514|0000001|0
+No timetables found for timetable_page_id=13514|0000001|0

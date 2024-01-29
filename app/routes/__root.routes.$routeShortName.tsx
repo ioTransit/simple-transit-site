@@ -1,14 +1,15 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import clsx from "clsx";
-import { eq, inArray } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import groupBy from "lodash/groupBy";
 import { useState } from "react";
 
 import { db } from "drizzle/config";
-import { routes, trips } from "drizzle/schema";
+import { routes } from "drizzle/schema";
 import { Button } from "~/components/ui/button";
-import { getDow, getFiles, getService } from "~/lib/utils";
+import { getDow, getFiles, getGeojson, getService } from "~/lib/utils";
+import { getDirections } from "~/models/directions.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { routeShortName } = params;
@@ -22,29 +23,20 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   if (!_routes[0].routeShortName) return redirect("/");
   const files = getFiles(formattedDate, _routes[0].routeShortName);
+  const geojson = getGeojson(routeShortName);
 
-  const directions = await db
-    .select({
-      directionId: trips.directionId,
-      tripHeadsign: trips.tripHeadsign,
-    })
-    .from(trips)
-    .groupBy(trips.directionId, trips.tripHeadsign)
-    .orderBy(trips.tripHeadsign)
-    .where(
-      inArray(
-        trips.routeId,
-        _routes.map((el) => el.routeId),
-      ),
-    );
+  const routeIds = _routes.map((el) => el.routeId);
+  const [directions] = await Promise.all([getDirections(routeIds)]);
 
   const serviceIds = Object.keys(groupBy(files, "service"));
   const service = getService(serviceIds, dow);
+
   return json({
     routes: _routes,
     dow,
     service,
     files,
+    geojson,
     directions: groupBy(directions, "directionId"),
   });
 }
@@ -56,6 +48,7 @@ export default function RootRouteTemplate() {
     Object.keys(loaderData.directions)[0],
   );
 
+  // console.log(loaderData);
   return (
     <div className="flex flex-col gap-3 w-[80%] py-3">
       <h1 className="text-3xl font-bold">

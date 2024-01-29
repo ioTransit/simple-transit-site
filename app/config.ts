@@ -1,13 +1,19 @@
 export const gtfsConfig = {
   agencies: [
     {
+      agency_key: "gotriangle",
       url: "http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip",
     },
   ],
   sqlitePath: "drizzle/data.db",
   debug: false,
-  noHead: true,
+  // noHead: true,
   // outputFormat: "csv",
+  outputFormat: "lines-and-stops",
+  outputType: "route",
+  showMap: true,
+  mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN,
+  zipOutput: true,
 };
 export const region = "en-US";
 export const timezone = "America/New_York";

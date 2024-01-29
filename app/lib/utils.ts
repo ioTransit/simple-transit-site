@@ -87,6 +87,27 @@ export const getFiles = (date: number, routeShortName: string) => {
     );
 };
 
+export const getGeojson = (routeShortName: string) => {
+  const agency = process.env.AGENCY_NAME;
+  if (!agency) throw Error("Agency missing in env");
+  else {
+    const files = fs
+      .readdirSync(`geojson/${agency}`)
+      .filter((el) => el.includes(`_${routeShortName}_`));
+    return files.map((el) => {
+      const contents = readFileToString(`${`geojson/${agency}`}/${el}`);
+      const [, routeShortName, direction] = el.split("_");
+      const obj = {
+        fileName: el,
+        routeShortName,
+        direction: direction.replace(".geojson", ""),
+        contents,
+      };
+      return obj;
+    });
+  }
+};
+
 export const getService = (serviceIds: string[], dow: string) => {
   switch (dow) {
     case "Saturday":
