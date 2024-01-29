@@ -13,7 +13,7 @@ import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
-  if (userId) return redirect("/");
+  if (!userId) return redirect("/");
   return json({});
 };
 
@@ -87,6 +87,7 @@ export default function Join() {
   return (
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
+        <h1 className="text-2xl text-center py-2 font-medium">Invite Users</h1>
         <Form method="post" className="space-y-6">
           <div>
             <label
@@ -150,20 +151,6 @@ export default function Join() {
           >
             Create Account
           </button>
-          <div className="flex items-center justify-center">
-            <div className="text-center text-sm text-gray-500">
-              Already have an account?{" "}
-              <Link
-                className="text-blue-500 underline"
-                to={{
-                  pathname: "/login",
-                  search: searchParams.toString(),
-                }}
-              >
-                Log in
-              </Link>
-            </div>
-          </div>
         </Form>
       </div>
     </div>
