@@ -11,8 +11,7 @@ export const gtfsConfig = {
   // outputFormat: "csv",
   outputFormat: "lines-and-stops",
   outputType: "route",
-  showMap: true,
-  mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN,
+  showMap: false,
   zipOutput: true,
 };
 export const region = "en-US";

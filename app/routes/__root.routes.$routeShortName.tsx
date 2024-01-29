@@ -1,9 +1,16 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import {
+  LinksFunction,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import clsx from "clsx";
 import { eq } from "drizzle-orm";
 import groupBy from "lodash/groupBy";
+import mapboxCss from "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
+import Map from "react-map-gl"; //eslint-disable-line
 
 import { db } from "drizzle/config";
 import { routes } from "drizzle/schema";
@@ -11,6 +18,9 @@ import { Button } from "~/components/ui/button";
 import { getDow, getFiles, getGeojson, getService } from "~/lib/utils";
 import { getDirections } from "~/models/directions.server";
 
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: mapboxCss }];
+};
 export async function loader({ params }: LoaderFunctionArgs) {
   const { routeShortName } = params;
   if (!routeShortName) return redirect("/");
@@ -31,12 +41,16 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const serviceIds = Object.keys(groupBy(files, "service"));
   const service = getService(serviceIds, dow);
 
+  const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN;
+  if (!mapboxAccessToken) throw Error("Mapbox access token not found");
+
   return json({
     routes: _routes,
     dow,
     service,
     files,
     geojson,
+    mapboxAccessToken,
     directions: groupBy(directions, "directionId"),
   });
 }
@@ -54,6 +68,16 @@ export default function RootRouteTemplate() {
       <h1 className="text-3xl font-bold">
         {loaderData.routes[0].routeLongName}
       </h1>
+      <Map
+        mapboxAccessToken={loaderData.mapboxAccessToken}
+        initialViewState={{
+          longitude: -122.4,
+          latitude: 37.8,
+          zoom: 14,
+        }}
+        style={{ width: 600, height: 400 }}
+        mapStyle="mapbox://styles/mapbox/streets-v9"
+      />
       {loaderData.files.length === 0 ? (
         <div className="flex flex-col gap-3">No files found for this route</div>
       ) : (
