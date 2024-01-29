@@ -11,8 +11,8 @@ export async function loader() {
 export default function RouteRootTemplat() {
   const loaderData = useLoaderData<typeof loader>();
   return (
-    <div className="flex w-full gap-3 overflow-hidden">
-      <div className="w-60">
+    <div className="flex w-full gap-6 overflow-hidden">
+      <div className="w-[350px]">
         <ul>
           {loaderData.allRoutes.map((el) => (
             <li key={el.routeId}>

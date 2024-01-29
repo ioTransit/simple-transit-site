@@ -46,7 +46,7 @@ export default function RootTemplate() {
           </DropdownMenu>
         </div>
       </div>
-      <div className="flex-col flex justify-center px-12">
+      <div className="flex-col flex justify-center px-8">
         <Outlet />
       </div>
     </div>
