@@ -118,7 +118,7 @@ export default function RootRouteTemplate() {
 
   console.log(loaderData);
   return (
-    <div className="flex flex-col gap-3 w-[70%] py-3">
+    <div className="flex flex-col gap-3 w-[70%] pb-3 pr-10">
       <h1 className="text-3xl font-bold">
         {loaderData.routes[0].routeLongName}
       </h1>

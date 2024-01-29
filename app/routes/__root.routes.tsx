@@ -12,7 +12,7 @@ export default function RouteRootTemplat() {
   const loaderData = useLoaderData<typeof loader>();
   return (
     <div className="flex w-full gap-6 overflow-hidden">
-      <div className="w-[350px]">
+      <div className="w-[350px] pl-8">
         <ul>
           {loaderData.allRoutes.map((el) => (
             <li key={el.routeId}>
