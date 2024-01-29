@@ -5,8 +5,8 @@ import { note } from "drizzle/schema";
 import { dbDate } from "~/utils";
 
 export async function getNote({ id }: { id: string }) {
-  const [note] = await db.select().from(note).where(eq(note.id, id)).limit(1);
-  return note;
+  const [_note] = await db.select().from(note).where(eq(note.id, id)).limit(1);
+  return _note;
 }
 
 export function getNoteListItems() {
@@ -16,7 +16,7 @@ export function getNoteListItems() {
     .orderBy(note.createdAt);
 }
 
-export function createNote({
+export async function createNote({
   body,
   title,
   userId,
@@ -25,7 +25,11 @@ export function createNote({
   title: string;
   userId: string;
 }) {
-  return db.insert(note).values([{ body, title, userId, updatedAt: dbDate() }]);
+  const [_note] = await db
+    .insert(note)
+    .values([{ body, title, userId, updatedAt: dbDate() }])
+    .returning({ id: note.id });
+  return _note;
 }
 
 export function deleteNote({ id }: { id: string }) {

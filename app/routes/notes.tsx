@@ -1,20 +1,23 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
+import { title } from "~/config";
 import { getNoteListItems } from "~/models/note.server";
+import { getUserById } from "~/models/user.server";
 import { requireUserId } from "~/session.server";
-import { useUser } from "~/utils";
+
+export const meta: MetaFunction = () => [{ title }];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await requireUserId(request);
-  const noteListItems = await getNoteListItems({ userId });
-  return json({ noteListItems });
+  const user = await getUserById(userId);
+  const noteListItems = await getNoteListItems();
+  return json({ noteListItems, user });
 };
 
 export default function NotesPage() {
   const data = useLoaderData<typeof loader>();
-  const user = useUser();
 
   return (
     <div className="flex h-full min-h-screen flex-col">
@@ -22,7 +25,7 @@ export default function NotesPage() {
         <h1 className="text-3xl font-bold">
           <Link to=".">Notes</Link>
         </h1>
-        <p>{user.email}</p>
+        <p>{data.user.email}</p>
         <Form action="/logout" method="post">
           <button
             type="submit"
