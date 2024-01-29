@@ -25,11 +25,11 @@ export default function RootTemplate() {
 
   return (
     <div>
-      <div className="w-full flex p-8 gap-8">
+      <div className="mx-auto flex py-8 gap-8 w-5/6">
         <Link to="/">
-          <GoTriangleLogo height={90} />
+          <GoTriangleLogo height={50} />
         </Link>
-        <div className="flex items-end ">
+        <div className="flex items-end gap-6">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <span className="hover:text-blue-400">Routes</span>{" "}
@@ -44,9 +44,15 @@ export default function RootTemplate() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
+          <Link to={"/#about"}>
+            <span className="hover:text-blue-400">About</span>
+          </Link>
+          <Link to={"/#contact"}>
+            <span className="hover:text-blue-400">Contact</span>
+          </Link>
         </div>
       </div>
-      <div className="flex-col flex justify-center px-8">
+      <div className="flex-col flex justify-center">
         <Outlet />
       </div>
     </div>

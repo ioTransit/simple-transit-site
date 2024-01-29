@@ -100,3 +100,11 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.link {
+  @apply text-gray-300 font-medium underline hover:text-blue-500;
+}
+
+.header {
+  background: url("/header.jpg") center/cover;
+}
