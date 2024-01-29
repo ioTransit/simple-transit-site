@@ -5,8 +5,10 @@
 
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { installGlobals } from "@remix-run/node";
+import { eq } from "drizzle-orm";
 
-import { prisma } from "~/db.server";
+import { db } from "../../drizzle/config";
+import { password, user } from "../../drizzle/schema";
 
 installGlobals();
 
@@ -19,7 +21,11 @@ async function deleteUser(email: string) {
   }
 
   try {
-    await prisma.user.delete({ where: { email } });
+    const [_user] = await db
+      .delete(user)
+      .where(eq(user.email, email))
+      .returning({ id: user.id });
+    await db.delete(password).where(eq(password.userId, _user.id));
   } catch (error) {
     if (
       error instanceof PrismaClientKnownRequestError &&
@@ -29,8 +35,6 @@ async function deleteUser(email: string) {
     } else {
       throw error;
     }
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
