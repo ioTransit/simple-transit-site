@@ -4,7 +4,7 @@ export const gtfsConfig = {
       url: "http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip",
     },
   ],
-  sqlitePath: "prisma/data.db",
+  sqlitePath: "drizzle/data.db",
   debug: false,
   noHead: true,
   // outputFormat: "csv",
@@ -21,4 +21,4 @@ export const serviceTypes = {
   saturday: { label: "Saturday", file: "sat" },
   sunday: { label: "Sunday", file: "sun" },
 };
-export const title = "Triangle Transit";
+export const title = "GoTriangle Transit";
