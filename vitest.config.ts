@@ -3,6 +3,7 @@
 
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
+// @ts-expect-error no types
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({

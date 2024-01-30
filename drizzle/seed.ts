@@ -22,10 +22,12 @@ async function seed() {
         },
       ])
       .returning({ id: user.id });
-    await tx.insert(password).values({
-      userId: createdUser.id,
-      hash: hashedPassword,
-    });
+    if (createdUser) {
+      await tx.insert(password).values({
+        userId: createdUser.id,
+        hash: hashedPassword,
+      });
+    }
   });
   console.log(`Database has been seeded. 🌱`);
 }

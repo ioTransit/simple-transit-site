@@ -1,3 +1,4 @@
+// @ts-expect-error no types
 import { importGtfs } from "gtfs";
 // @ts-expect-error no types
 import gtfsToGeoJSON from "gtfs-to-geojson";

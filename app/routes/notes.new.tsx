@@ -28,7 +28,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const note = await createNote({ body, title, userId });
-
+  if (!note) return json(null);
   return redirect(`/notes/${note.id}`);
 };
 

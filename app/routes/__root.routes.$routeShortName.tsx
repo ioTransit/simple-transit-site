@@ -34,7 +34,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const { dow, formattedDate } = getDow(new Date());
 
-  if (!_routes[0].routeShortName) return redirect("/");
+  if (!_routes[0] || !_routes[0].routeShortName) return redirect("/");
   const files = getFiles(formattedDate, _routes[0].routeShortName);
   const geojson = getGeojson(routeShortName);
 
@@ -55,6 +55,9 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const serviceIds = Object.keys(groupBy(files, "service"));
   const service = getService(serviceIds, dow);
+  if (!service) throw Error("Service not found");
+  const routeLongName = _routes[0].routeLongName;
+  if (!routeLongName) throw Error("Route Long Name not found");
 
   const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN;
   if (!mapboxAccessToken) throw Error("Mapbox access token not found");
@@ -67,6 +70,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     files,
     geojson,
     mapboxAccessToken,
+    routeLongName,
     directions: groupBy(directions, "directionId"),
   });
 }
@@ -119,9 +123,7 @@ export default function RootRouteTemplate() {
   console.log(loaderData);
   return (
     <div className="flex flex-col gap-3 w-[70%] pb-3 pr-10">
-      <h1 className="text-3xl font-bold">
-        {loaderData.routes[0].routeLongName}
-      </h1>
+      <h1 className="text-3xl font-bold">{loaderData.routeLongName}</h1>
       <Map
         mapboxAccessToken={loaderData.mapboxAccessToken}
         initialViewState={{

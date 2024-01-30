@@ -62,11 +62,13 @@ export const getFiles = (date: number, routeShortName: string) => {
     .filter((el) => el.includes("-"))
     .map((el) => {
       const [startDate, endDate] = el.split("-");
+      if (!startDate || !endDate) throw Error("Dates are missing in folder");
       return { startDate: parseInt(startDate), endDate: parseInt(endDate) };
     });
   const [currentFolder] = folders.filter(({ startDate, endDate }) => {
     return startDate <= date && endDate >= date;
   });
+  if (!currentFolder) throw Error("Current folder not found");
   const folder = `html/${currentFolder.startDate}-${currentFolder.endDate}`;
   const files = fs.readdirSync(folder);
 
@@ -74,6 +76,8 @@ export const getFiles = (date: number, routeShortName: string) => {
     .map((el) => {
       const contents = readFileToString(`${folder}/${el}`);
       const [, routeShortName, direction, service] = el.split("_");
+      if (!routeShortName || !direction || !service)
+        throw Error("Error with contents");
       const obj = {
         fileName: el,
         routeShortName,
@@ -100,6 +104,8 @@ export const getGeojson = (routeShortName: string) => {
         readFileToString(`${`geojson/${agency}`}/${el}`),
       ) as FeatureCollection<Point>;
       const [, routeShortName, direction] = el.split("_");
+      if (!direction || !routeShortName)
+        throw Error("GeoJson not formatted properly");
       const obj = {
         fileName: el,
         routeShortName,

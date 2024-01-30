@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import { db } from "drizzle/config";
-import { password, user } from "drizzle/schema";
+import { db } from "../../drizzle/config";
+import { password, user } from "../../drizzle/schema";
 
 export async function getUserById(id: string) {
   const [_user] = await db.select().from(user).where(eq(user.id, id)).limit(1);
@@ -27,10 +27,11 @@ export async function createUser(email: string, _password: string) {
         },
       ])
       .returning({ id: user.id, email: user.email });
-    await tx.insert(password).values({
-      userId: createdUser.id,
-      hash: hashedPassword,
-    });
+    if (createdUser)
+      await tx.insert(password).values({
+        userId: createdUser.id,
+        hash: hashedPassword,
+      });
     return createdUser;
   });
 }
