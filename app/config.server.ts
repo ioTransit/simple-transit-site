@@ -11,10 +11,11 @@ export const gtfsConfig = {
   ],
   sqlitePath: "drizzle/data.db",
   debug: false,
+  noHead: true,
+  beautify: true,
   outputFormat: "lines-and-stops",
   outputType: "route",
   showMap: false,
-  zipOutput: true,
 };
 export const region = "en-US";
 export const timezone = "America/New_York";

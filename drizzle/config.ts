@@ -15,6 +15,6 @@ export default {
 //   url: "file:./drizzle/data.db",
 //   authToken: "DATABASE_AUTH_TOKEN",
 // });
-export const sqlite = new Database("file:./drizzle/data.db");
+export const sqlite = new Database("drizzle/data.db");
 
 export const db = drizzle(sqlite);
