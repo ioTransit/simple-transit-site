@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { AtSign, GithubIcon, LinkedinIcon } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -8,8 +9,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { title } from "~/config";
-import { GoTriangleLogo } from "~/images";
+import { title } from "~/config.server";
+import { GoTriangleLogo, HeadshotImage } from "~/images";
 import { getAllRoutes } from "~/models/routes.server";
 
 export async function loader() {
@@ -54,6 +55,31 @@ export default function RootTemplate() {
       </div>
       <div className="flex-col flex justify-center">
         <Outlet />
+      </div>
+      <div
+        id="contact"
+        className="w-3/4 text-center lg:w-1/2 mx-auto flex flex-col gap-10 py-20"
+      >
+        <h2 className="text-4xl text-center font-medium">Contact</h2>
+        <div className="mx-auto">
+          <HeadshotImage />
+        </div>
+        <p>
+          Want to get your own Simple Transit Site? You can find this project
+          open on Github. If you need some help or if you have a special project
+          that you want to work on reach out to Walter.
+        </p>
+        <div className="flex gap-6 mx-auto">
+          <a href="https://www.linkedin.com/in/walter-k-jenkins/">
+            <LinkedinIcon size={30} className="hover:text-blue-500" />
+          </a>
+          <a href="https://github.com/AvidDabbler">
+            <GithubIcon size={30} className="hover:text-blue-500" />
+          </a>
+          <a href="mailto:walter@transit.chat">
+            <AtSign size={30} className="hover:text-blue-500" />
+          </a>
+        </div>
       </div>
     </div>
   );

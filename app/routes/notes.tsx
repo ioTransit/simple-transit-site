@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
-import { title } from "~/config";
+import { title } from "~/config.server";
 import { getNoteListItems } from "~/models/note.server";
 import { getUserById } from "~/models/user.server";
 import { requireUserId } from "~/session.server";

@@ -4,7 +4,7 @@ import { type ClassValue, clsx } from "clsx";
 import { FeatureCollection, Point } from "geojson";
 import { twMerge } from "tailwind-merge";
 
-import { region, timezone } from "~/config";
+import { region, timezone } from "~/config.server";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

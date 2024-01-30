@@ -47,6 +47,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",
     "gtfs": "^4.6.0",
     "gtfs-to-geojson": "^3.4.4",

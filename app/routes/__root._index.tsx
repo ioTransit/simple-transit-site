@@ -1,11 +1,4 @@
-import {
-  AtSign,
-  BusFront,
-  GithubIcon,
-  LinkedinIcon,
-  Map,
-  RecycleIcon,
-} from "lucide-react";
+import { BusFront, Map, RecycleIcon } from "lucide-react";
 
 export default function RootIndex() {
   return (
@@ -63,25 +56,6 @@ export default function RootIndex() {
               great experience for you riders.
             </p>
           </div>
-        </div>
-      </div>
-      <div id="contact" className="w-2/3 mx-auto flex flex-col gap-10 py-20">
-        <h2 className="text-4xl text-center font-medium">Contact</h2>
-        <p>
-          Want to get your own Simple Transit Site? You can find this project
-          open on Github. If you need some help or if you have a special project
-          that you want to work on reach out to Walter.
-        </p>
-        <div className="flex gap-6 mx-auto">
-          <a href="https://www.linkedin.com/in/walter-k-jenkins/">
-            <LinkedinIcon size={30} className="hover:text-blue-500" />
-          </a>
-          <a href="https://github.com/AvidDabbler">
-            <GithubIcon size={30} className="hover:text-blue-500" />
-          </a>
-          <a href="mailto:walter@transit.chat">
-            <AtSign size={30} className="hover:text-blue-500" />
-          </a>
         </div>
       </div>
     </div>
