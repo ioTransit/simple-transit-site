@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { title } from "~/config.server";
 import { GoTriangleLogo, HeadshotImage } from "~/images";
 import { getAllRoutes } from "~/models/routes.server";
 
@@ -19,7 +18,7 @@ export async function loader() {
   return json({ routes: _routes });
 }
 
-export const meta: MetaFunction = () => [{ title }];
+export const meta: MetaFunction = () => [{ title: "GoTriangle Transit" }];
 
 export default function RootTemplate() {
   const loaderData = useLoaderData<typeof loader>();
