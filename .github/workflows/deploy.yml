@@ -75,3 +75,20 @@ jobs:
 
       - name: ⚡ Run vitest
         run: npm run test -- --coverage
+
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck, vitest]
+    # only deploy main/dev branch on pushes
+    if: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && github.event_name == 'push' }}
+
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: "ssh://dokku@dokku.me:22/appname"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
