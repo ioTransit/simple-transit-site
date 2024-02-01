@@ -5,10 +5,11 @@ import gtfsToGeoJSON from "gtfs-to-geojson";
 // @ts-expect-error no types
 import gtfsToHtml from "gtfs-to-html";
 
-import { gtfsConfig } from "../config.server";
+import { gtfsConfig, envConfig } from "../config.server";
 
 export const load = async () => {
   try {
+    console.log(envConfig);
     await importGtfs(gtfsConfig);
     await gtfsToHtml(gtfsConfig)
       .then(() => {
