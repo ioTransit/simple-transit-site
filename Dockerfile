@@ -31,11 +31,11 @@ WORKDIR /myapp
 
 COPY --from=deps /myapp/node_modules /myapp/node_modules
 
-ADD drizzle .
-RUN npm run generate
-
 ADD . .
 RUN npm run build
+
+ADD drizzle .
+RUN npm run generate
 
 RUN npm run gtfs
 
