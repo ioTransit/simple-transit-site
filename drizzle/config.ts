@@ -3,9 +3,9 @@ import type { Config } from "drizzle-kit";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 
 export default {
-  schema: "./src/schema/*",
-  out: "./drizzle",
-  driver: "libsql",
+  schema: "./drizzle/schema.ts",
+  out: "./drizzle/migrations",
+  driver: "better-sqlite",
   dbCredentials: {
     url: "file:./drizzle/data.db",
   },
