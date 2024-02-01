@@ -6,7 +6,7 @@ export const gtfsConfig = {
   agencies: [
     {
       agency_key: "gotriangle",
-      url: envConfig?.GTFS_URL,
+      url: "http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip",
     },
   ],
   sqlitePath: "drizzle/data.db",
