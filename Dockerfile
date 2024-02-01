@@ -37,6 +37,8 @@ RUN npm run generate
 ADD . .
 RUN npm run build
 
+RUN npm run gtfs
+
 # Finally, build the production image with minimal footprint
 FROM base
 
