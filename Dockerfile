@@ -37,15 +37,16 @@ RUN npm run build
 ADD drizzle .
 RUN npm run generate
 
+ENV DATABASE_URL=file:/data/sqlite.db
+ENV PORT="8080"
+ENV NODE_ENV="production"
+ENV GTFS_URL="http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip"
+
 RUN npm run gtfs
 
 # Finally, build the production image with minimal footprint
 FROM base
 
-ENV DATABASE_URL=file:/data/sqlite.db
-ENV PORT="8080"
-ENV NODE_ENV="production"
-ENV GTFS_URL="http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip"
 
 # add shortcut for connecting to database CLI
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
