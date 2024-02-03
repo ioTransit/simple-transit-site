@@ -4,23 +4,27 @@ import path from "path";
 import { z } from "zod";
 
 const loadEnv = () => {
-  // Path to the .env file
-  const envFilePath = path.resolve(__dirname, ".env");
-  console.log(envFilePath);
+  try {
+    // Path to the .env file
+    const envFilePath = path.resolve(__dirname, ".env");
+    console.log(envFilePath);
 
-  // Read the contents of the .env file
-  const envFileContent = fs.readFileSync(envFilePath, "utf8");
+    // Read the contents of the .env file
+    const envFileContent = fs.readFileSync(envFilePath, "utf8");
 
-  // Split the content into lines
-  const envLines = envFileContent.split("\n");
+    // Split the content into lines
+    const envLines = envFileContent.split("\n");
 
-  // Set each environment variable
-  envLines.forEach((line) => {
-    const [key, value] = line.split("=");
-    if (key && value)
-      process.env[key.trim()] = value.trim().replaceAll('"', "");
-    console.log(key, value);
-  });
+    // Set each environment variable
+    envLines.forEach((line) => {
+      const [key, value] = line.split("=");
+      if (key && value)
+        process.env[key.trim()] = value.trim().replaceAll('"', "");
+      console.log(key, value);
+    });
+  } catch {
+    return;
+  }
 };
 
 const config = () => {
