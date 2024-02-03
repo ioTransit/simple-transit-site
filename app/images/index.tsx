@@ -1,16 +1,19 @@
 import GoTriangle from "./gotriangle-logo.png";
-import Headshot from "./headshot.jpg";
-export const HeadshotImage = () => {
-  return (
-    <img
-      src={Headshot}
-      alt="Walter Jenkins headshot"
-      className="rounded-full"
-      style={{ height: 180 }}
-    />
-  );
-};
+import TransitChatVert from "./TransitChat-vert.png";
+import TransitChat from "./TransitChat.svg";
 
-export const GoTriangleLogo = ({ height }: { height: number }) => (
-  <img src={GoTriangle} style={{ height }} alt="GoTriangle Logo" />
+export const GoTriangleLogo = ({ className }: { className: string }) => (
+  <img src={GoTriangle} alt="GoTriangle Logo" className={className} />
+);
+
+export const TransitChatVeritcalLogo = ({
+  className,
+}: {
+  className: string;
+}) => (
+  <img src={TransitChatVert} alt="TransitChat Logo" className={className} />
+);
+
+export const TransitChatLogo = ({ className }: { className: string }) => (
+  <img src={TransitChat} alt="TransitChat Logo" className={className} />
 );

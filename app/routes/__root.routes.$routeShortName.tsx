@@ -12,8 +12,14 @@ import { eq } from "drizzle-orm";
 import concat from "lodash/concat";
 import groupBy from "lodash/groupBy";
 import mapboxCss from "mapbox-gl/dist/mapbox-gl.css";
-import { useState } from "react";
-import Map, { CircleLayer, Layer, LineLayer, Source } from "react-map-gl"; //eslint-disable-line
+import { useEffect, useState } from "react";
+import Map, { // eslint-disable-line
+  CircleLayer,
+  Layer,
+  LineLayer,
+  Source,
+  useMap,
+} from "react-map-gl";
 
 import { db } from "drizzle/config";
 import { routes } from "drizzle/schema";
@@ -120,7 +126,6 @@ export default function RootRouteTemplate() {
     Object.keys(loaderData.directions)[0],
   );
 
-  console.log(loaderData);
   return (
     <div className="flex flex-col gap-3 w-[70%] pb-3 pr-10">
       <h1 className="text-3xl font-bold">{loaderData.routeLongName}</h1>
@@ -135,6 +140,7 @@ export default function RootRouteTemplate() {
         style={{ width: "100%", height: 400 }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
+        <ReloadMap />
         {loaderData.geojson.map((el) => (
           <Source
             key={el.fileName}
@@ -212,3 +218,16 @@ export default function RootRouteTemplate() {
     </div>
   );
 }
+
+const ReloadMap = () => {
+  const loaderData = useLoaderData<typeof loader>();
+  const { current: map } = useMap();
+
+  useEffect(() => {
+    map?.fitBounds(loaderData.bounds as [number, number, number, number], {
+      padding: { top: 20, bottom: 20, right: 20, left: 20 },
+    });
+  }, [loaderData.routeLongName, loaderData.bounds]); // eslint-disable-line
+
+  return null;
+};
