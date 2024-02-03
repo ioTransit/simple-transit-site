@@ -44,17 +44,19 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const files = getFiles(formattedDate, _routes[0].routeShortName);
   const geojson = getGeojson(routeShortName);
 
-  const bounds = bbox(
-    lineString(
-      concat(
-        ...geojson.map((el) =>
-          el.contents.features
-            .filter((el) => el.properties?.stop_id)
-            .map((feat) => feat.geometry.coordinates),
+  const bounds = geojson[0]
+    ? bbox(
+        lineString(
+          concat(
+            ...geojson.map((el) =>
+              el.contents.features
+                .filter((el) => el.properties?.stop_id)
+                .map((feat) => feat.geometry.coordinates),
+            ),
+          ),
         ),
-      ),
-    ),
-  );
+      )
+    : null;
 
   const routeIds = _routes.map((el) => el.routeId);
   const [directions] = await Promise.all([getDirections(routeIds)]);
@@ -125,38 +127,39 @@ export default function RootRouteTemplate() {
   const [direction, setDirection] = useState(
     Object.keys(loaderData.directions)[0],
   );
-
   return (
     <div className="flex flex-col gap-3 w-[70%] pb-3 pr-10">
       <h1 className="text-3xl font-bold">{loaderData.routeLongName}</h1>
-      <Map
-        mapboxAccessToken={loaderData.mapboxAccessToken}
-        initialViewState={{
-          bounds: loaderData.bounds as [number, number, number, number],
-          fitBoundsOptions: {
-            padding: { top: 20, bottom: 20, right: 20, left: 20 },
-          },
-        }}
-        style={{ width: "100%", height: 400 }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-      >
-        <ReloadMap />
-        {loaderData.geojson.map((el) => (
-          <Source
-            key={el.fileName}
-            id={el.fileName}
-            data={el.contents}
-            type="geojson"
-          >
-            <Layer
-              {...routesStyle(el.fileName)}
-              filter={["has", "route_id"]}
-              beforeId="road-label-small"
-            />
-            <Layer {...stopsStyle(el.fileName)} filter={["has", "stop_id"]} />
-          </Source>
-        ))}
-      </Map>
+      {loaderData.bounds ? (
+        <Map
+          mapboxAccessToken={loaderData.mapboxAccessToken}
+          initialViewState={{
+            bounds: loaderData.bounds as [number, number, number, number],
+            fitBoundsOptions: {
+              padding: { top: 20, bottom: 20, right: 20, left: 20 },
+            },
+          }}
+          style={{ width: "100%", height: 400 }}
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+        >
+          <ReloadMap />
+          {loaderData.geojson.map((el) => (
+            <Source
+              key={el.fileName}
+              id={el.fileName}
+              data={el.contents}
+              type="geojson"
+            >
+              <Layer
+                {...routesStyle(el.fileName)}
+                filter={["has", "route_id"]}
+                beforeId="road-label-small"
+              />
+              <Layer {...stopsStyle(el.fileName)} filter={["has", "stop_id"]} />
+            </Source>
+          ))}
+        </Map>
+      ) : null}
       {loaderData.files.length === 0 ? (
         <div className="flex flex-col gap-3">No files found for this route</div>
       ) : (
@@ -230,4 +233,15 @@ const ReloadMap = () => {
   }, [loaderData.routeLongName, loaderData.bounds]); // eslint-disable-line
 
   return null;
+};
+
+export const ErrorBoundary = () => {
+  return (
+    <div className="my-auto flex flex-col gap-3 w-[60%] pb-3 pr-10">
+      <h1 className="text-3xl text-center">
+        Oops! Looks like you found a bug. This might be a problem with your
+        GTFS.
+      </h1>
+    </div>
+  );
 };
