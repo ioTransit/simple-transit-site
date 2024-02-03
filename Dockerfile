@@ -4,6 +4,16 @@ FROM node:18-bullseye-slim as base
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
+ENV DATABASE_URL=${DATABASE_URL}
+ENV SESSION_SECRET=${SESSION_SECRET}
+ENV AGENCY_NAME=${AGENCY_NAME}
+ENV MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
+ENV GTFS_URL=${GTFS_URL}
+
+ADMIN_EMAIL="walter@transit.chat"
+ADMIN_PASSWORD="walteriscoool"
+
+
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl sqlite3
 
