@@ -6,21 +6,6 @@ import { password, user } from "drizzle/schema";
 
 import { envConfig } from "./config.server";
 
-// const config = () => {
-//   const _config = z
-//     .object({
-//       ADMIN_EMAIL: z.string(),
-//       ADMIN_PASSWORD: z.string(),
-//       DATABASE_URL: z.string(),
-//       AGENCY_NAME: z.string(),
-//       MAPBOX_ACCESS_TOKEN: z.string(),
-//       GTFS_URL: z.string(),
-//     })
-//     .parse(process.env);
-//   return _config;
-// };
-//
-// const envConfig = config();
 async function predeploy() {
   const email = envConfig.ADMIN_EMAIL;
 
