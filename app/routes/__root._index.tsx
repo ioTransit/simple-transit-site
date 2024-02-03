@@ -1,5 +1,7 @@
 import { BusFront, Map, RecycleIcon } from "lucide-react";
 
+import { GtfsGeojsonLogo, GtfsHtmlLogo, GtfsNodeLogo } from "~/images";
+
 export default function RootIndex() {
   return (
     <div>
@@ -56,6 +58,14 @@ export default function RootIndex() {
               great experience for you riders.
             </p>
           </div>
+        </div>
+      </div>
+      <div className="flex flex-col mx-auto gap-6">
+        <h2 className="text-3xl text-center font-medium">Made With</h2>
+        <div className="flex md:flex-row flex-col gap-8 mx-auto">
+          <GtfsNodeLogo className="w-36" />
+          <GtfsGeojsonLogo className="w-36" />
+          <GtfsHtmlLogo className="w-36" />
         </div>
       </div>
     </div>
