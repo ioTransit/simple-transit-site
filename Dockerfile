@@ -58,6 +58,7 @@ ENV PORT="8080"
 ENV NODE_ENV="production"
 
 RUN npm run gtfs
+RUN npm run predeploy 
 
 # Finally, build the production image with minimal footprint
 FROM base

@@ -13,6 +13,5 @@
 # swapon /swapfile
 # echo 1 >/proc/sys/vm/overcommit_memory
 
-npm run predeploy
 # npx prisma migrate deploy
 npm run start

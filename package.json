@@ -11,7 +11,7 @@
     "start": "remix-serve ./build/index.js",
     "start:mocks": "binode --require ./mocks -- @remix-run/serve:remix-serve ./build/index.js",
     "test": "vitest",
-    "predeploy": "tsx app/predeploy.ts",
+    "predeploy": "tsx ./app/predeploy.ts",
     "seed": "tsx ./drizzle/seed.ts",
     "gtfs": "tsx ./app/gtfs/index.ts",
     "generate": "npx drizzle-kit generate:sqlite --config=./drizzle/config.ts",
