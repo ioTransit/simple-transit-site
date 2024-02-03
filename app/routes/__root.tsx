@@ -62,7 +62,7 @@ export default function RootTemplate() {
           </div>
         </div>
         <a
-          href="www.transit.chat"
+          href="https://www.transit.chat"
           className="text-gray-50L gap-2 hidden md:flex flex-col"
         >
           <span className="px-4">Made by</span>
@@ -93,7 +93,7 @@ export default function RootTemplate() {
           <a href="https://www.linkedin.com/company/transit-chat">
             <LinkedinIcon size={30} className="hover:text-blue-500" />
           </a>
-          <a href="www.transit.chat">
+          <a href="https://www.transit.chat">
             <Home size={30} className="hover:text-blue-500" />
           </a>
           <a href="mailto:walter@transit.chat">
