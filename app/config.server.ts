@@ -1,12 +1,24 @@
 import dotEnv from "dotenv";
+import { z } from "zod";
 
-export const { parsed: envConfig } = dotEnv.config();
+export const { parsed: envConfig } = z
+  .object({
+    parsed: z.object({
+      ADMIN_EMAIL: z.string(),
+      ADMIN_PASSWORD: z.string(),
+      DATABASE_URL: z.string(),
+      AGENCY_NAME: z.string(),
+      MAPBOX_ACCESS_TOKEN: z.string(),
+      GTFS_URL: z.string(),
+    }),
+  })
+  .parse(dotEnv.config());
 
 export const gtfsConfig = {
   agencies: [
     {
-      agency_key: "gotriangle",
-      url: "http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip",
+      agency_key: envConfig.AGENCY_NAME,
+      url: envConfig.GTFS_URL,
     },
   ],
   sqlitePath: "drizzle/data.db",
