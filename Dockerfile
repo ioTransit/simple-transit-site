@@ -11,6 +11,9 @@ ARG MAPBOX_ACCESS_TOKEN
 ARG GTFS_URL
 ARG ADMIN_EMAIL
 ARG ADMIN_PASSWORD
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG S3_BUCKET
 
 ENV SESSION_SECRET=${SESSION_SECRET}
 ENV AGENCY_NAME=${AGENCY_NAME}
@@ -18,11 +21,14 @@ ENV MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
 ENV GTFS_URL=${GTFS_URL}
 ENV ADMIN_EMAIL=${ADMIN_EMAIL}
 ENV ADMIN_PASSWORD=${ADMIN_PASSWORD}
+ENV REPLICA_URL=s3://${S3_BUCKET}/db
 
+ADD https://github.com/benbjohnson/litestream/releases/download/v0.3.8/litestream-v0.3.8-linux-amd64-static.tar.gz /tmp/litestream.tar.gz
+RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl sqlite3
-
+ 
 # Install all node_modules, including dev dependencies
 FROM base as deps
 
@@ -62,6 +68,10 @@ RUN npm run predeploy
 
 # Finally, build the production image with minimal footprint
 FROM base
+
+# Copy Litestream configuration file & startup script.
+COPY etc/litestream.yml /etc/litestream.yml
+COPY scripts/run.sh /scripts/run.sh
 
 
 # add shortcut for connecting to database CLI
