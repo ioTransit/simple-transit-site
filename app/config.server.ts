@@ -1,24 +1,20 @@
-import dotEnv from "dotenv";
 import { z } from "zod";
 
 const config = () => {
-  console.log(dotEnv.config());
   const _config = z
     .object({
-      parsed: z.object({
-        ADMIN_EMAIL: z.string(),
-        ADMIN_PASSWORD: z.string(),
-        DATABASE_URL: z.string(),
-        AGENCY_NAME: z.string(),
-        MAPBOX_ACCESS_TOKEN: z.string(),
-        GTFS_URL: z.string(),
-      }),
+      ADMIN_EMAIL: z.string(),
+      ADMIN_PASSWORD: z.string(),
+      DATABASE_URL: z.string(),
+      AGENCY_NAME: z.string(),
+      MAPBOX_ACCESS_TOKEN: z.string(),
+      GTFS_URL: z.string(),
     })
-    .parse(dotEnv.config());
+    .parse(process.env);
   return _config;
 };
 
-export const { parsed: envConfig } = config();
+export const envConfig = config();
 
 export const gtfsConfig = {
   agencies: [
