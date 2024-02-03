@@ -73,7 +73,6 @@ FROM base
 COPY etc/litestream.yml /etc/litestream.yml
 COPY scripts/run.sh /scripts/run.sh
 
-
 # add shortcut for connecting to database CLI
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
 
@@ -88,5 +87,7 @@ COPY --from=build /remix/start.sh /remix/start.sh
 COPY --from=build /remix/html /remix/html
 COPY --from=build /remix/geojson /remix/geojson
 COPY --from=build /remix/drizzle /remix/drizzle
+
+CMD [ "/scripts/run.sh" ]
 
 ENTRYPOINT [ "./start.sh" ]
