@@ -5,7 +5,6 @@ FROM node:18-bullseye-slim as base
 ENV NODE_ENV production
 
 # pass down env variables
-ARG DATABASE_URL
 ARG SESSION_SECRET
 ARG AGENCY_NAME
 ARG MAPBOX_ACCESS_TOKEN
@@ -13,7 +12,6 @@ ARG GTFS_URL
 ARG ADMIN_EMAIL
 ARG ADMIN_PASSWORD
 
-ENV DATABASE_URL=${DATABASE_URL}
 ENV SESSION_SECRET=${SESSION_SECRET}
 ENV AGENCY_NAME=${AGENCY_NAME}
 ENV MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
@@ -58,7 +56,6 @@ RUN npm run generate
 ENV DATABASE_URL=file:/data/sqlite.db
 ENV PORT="8080"
 ENV NODE_ENV="production"
-ENV GTFS_URL="http://data.trilliumtransit.com/gtfs/tta-regionalbus-nc-us/tta-regionalbus-nc-us.zip"
 
 RUN npm run gtfs
 

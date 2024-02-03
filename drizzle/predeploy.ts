@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import { envConfig } from "~/config.server";
+import { envConfig } from "../app/config.server";
 
 import { db } from "./config";
 import { password, user } from "./schema";
