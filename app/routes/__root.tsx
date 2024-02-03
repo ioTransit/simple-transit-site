@@ -90,7 +90,7 @@ export default function RootTemplate() {
           that you want to work on reach out.
         </p>
         <div className="flex gap-6 mx-auto">
-          <a href="https://www.linkedin.com/in/walter-k-jenkins/">
+          <a href="https://www.linkedin.com/company/transit-chat">
             <LinkedinIcon size={30} className="hover:text-blue-500" />
           </a>
           <a href="www.transit.chat">
