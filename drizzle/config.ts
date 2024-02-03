@@ -7,7 +7,7 @@ export default {
   out: "./drizzle/migrations",
   driver: "better-sqlite",
   dbCredentials: {
-    url: "file:./drizzle/data.db",
+    url: "drizzle/data.db",
   },
 } satisfies Config;
 
