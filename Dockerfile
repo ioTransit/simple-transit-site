@@ -63,15 +63,17 @@ ENV DATABASE_URL=file:/data/sqlite.db
 ENV PORT="8080"
 ENV NODE_ENV="production"
 
+# Copy Litestream configuration file & startup script.
+COPY etc/litestream.yml /etc/litestream.yml
+COPY scripts/run.sh /scripts/run.sh
+
+CMD [ "/scripts/run.sh" ]
+
 RUN npm run gtfs
 RUN npm run predeploy 
 
 # Finally, build the production image with minimal footprint
 FROM base
-
-# Copy Litestream configuration file & startup script.
-COPY etc/litestream.yml /etc/litestream.yml
-COPY scripts/run.sh /scripts/run.sh
 
 # add shortcut for connecting to database CLI
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
@@ -87,7 +89,5 @@ COPY --from=build /remix/start.sh /remix/start.sh
 COPY --from=build /remix/html /remix/html
 COPY --from=build /remix/geojson /remix/geojson
 COPY --from=build /remix/drizzle /remix/drizzle
-
-CMD [ "/scripts/run.sh" ]
 
 ENTRYPOINT [ "./start.sh" ]
