@@ -4,14 +4,14 @@ FROM node:18-bullseye-slim as base
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
+# pass down env variables
 ENV DATABASE_URL=${DATABASE_URL}
 ENV SESSION_SECRET=${SESSION_SECRET}
 ENV AGENCY_NAME=${AGENCY_NAME}
 ENV MAPBOX_ACCESS_TOKEN=${MAPBOX_ACCESS_TOKEN}
 ENV GTFS_URL=${GTFS_URL}
-
-ADMIN_EMAIL="walter@transit.chat"
-ADMIN_PASSWORD="walteriscoool"
+ENV ADMIN_EMAIL=${ADMIN_EMAIL}
+ENV ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
 
 # Install openssl for Prisma
