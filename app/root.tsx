@@ -1,5 +1,9 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -13,8 +17,18 @@ import {
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
 
+export const meta: MetaFunction = () => {
+  return [
+    {
+      property: "og:image",
+      content: "https://simple-transit-site.transit.chat/header.jpg",
+    },
+  ];
+};
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
+
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
