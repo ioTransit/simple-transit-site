@@ -1,9 +1,10 @@
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 
-import { db } from "drizzle/config";
-import { password, user } from "drizzle/schema";
 import { envConfig } from "~/config.server";
+
+import { db } from "./config";
+import { password, user } from "./schema";
 
 async function predeploy() {
   const email = envConfig.ADMIN_EMAIL;
