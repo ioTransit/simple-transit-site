@@ -1,5 +1,5 @@
-const { sql } = require(  "drizzle-orm" );
+import { sql } from "drizzle-orm"
 
-const { db } = require("./config");
+import { db } from "./config";
 
 db.run(sql`PRAGMA journal_mode = WAL;`);
