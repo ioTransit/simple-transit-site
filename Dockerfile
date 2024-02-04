@@ -93,4 +93,4 @@ COPY --from=build /remix/html /remix/html
 COPY --from=build /remix/geojson /remix/geojson
 COPY --from=build /remix/drizzle /remix/drizzle
 
-ENTRYPOINT [ "./scripts/run.sh", "./start.sh" ]
+ENTRYPOINT [ "/scripts/run.sh", "./start.sh" ]
