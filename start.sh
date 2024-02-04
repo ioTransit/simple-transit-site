@@ -17,5 +17,5 @@
 ## Enables WAL Mode
 npm run enable-wal
 
-npx concurrently "litestream replicate -config /etc/litestream.yml" "npm run start"
-# exec litestream replicate -exec "npm run start"
+# npx concurrently "litestream replicate -config /etc/litestream.yml" "npm run start"
+exec litestream replicate -exec "npm run start"
