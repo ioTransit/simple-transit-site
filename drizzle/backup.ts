@@ -5,6 +5,10 @@ import { S3Client, CopyObjectCommand } from '@aws-sdk/client-s3'
 
 const s3Client = new S3Client({
   region: "us-east-1", // Replace with your AWS region
+  credentials: {
+    accessKeyId: envConfig.AWS_ACCESS_KEY_ID, // Replace with your AWS access key ID
+    secretAccessKey: envConfig.AWS_SECRET_ACCESS_KEY
+  },
 });
 
 // Function to perform S3 object copy (backup)
