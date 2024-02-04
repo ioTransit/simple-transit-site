@@ -83,7 +83,7 @@ WORKDIR /remix
 
 COPY --from=production-deps /remix/node_modules /remix/node_modules
 
-COPY etc/litestream.yml etc/litestream.yml
+COPY etc/litestream.yml /etc/litestream.yml
 COPY scripts/run.sh /scripts/run.sh
 COPY --from=build /remix/build /remix/build
 COPY --from=build /remix/public /remix/public
