@@ -38,6 +38,7 @@ const config = () => {
       AGENCY_NAME: z.string(),
       MAPBOX_ACCESS_TOKEN: z.string(),
       GTFS_URL: z.string(),
+      S3_BUCKET: z.string()
     })
     .parse(process.env);
   return _config;
