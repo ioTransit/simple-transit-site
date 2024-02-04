@@ -84,7 +84,7 @@ WORKDIR /remix
 COPY --from=production-deps /remix/node_modules /remix/node_modules
 
 COPY --from=build /remix/scripts /remix/scripts
-COPY --from=build /remix/ect /remix/ect
+COPY --from=build /remix/etc /remix/etc
 COPY --from=build /remix/build /remix/build
 COPY --from=build /remix/public /remix/public
 COPY --from=build /remix/package.json /remix/package.json
