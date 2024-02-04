@@ -58,6 +58,7 @@ RUN npm run build
 
 ADD drizzle .
 RUN npm run generate
+RUN npm run db:push
 
 ENV DATABASE_URL=file:/drizzle/sqlite.db
 ENV PORT="8080"
