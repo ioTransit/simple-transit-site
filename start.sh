@@ -16,5 +16,6 @@
 # npx prisma migrate deploy
 ## Enables WAL Mode
 
-npx concurrently "npm run backup" "npm run start"
+npm run start
+# npx concurrently "npm run backup" "npm run start"
 # exec litestream replicate -exec "npm run start" /drizzle/data.db s3://simple-transit-site/data.db

@@ -8,7 +8,7 @@ const s3Client = new S3Client({
 });
 
 // Function to perform S3 object copy (backup)
-async function backupS3Object(bucket: string, sourceKey: string, destinationKey: string) {
+export async function backupS3Object(bucket: string, sourceKey: string, destinationKey: string) {
   try {
     const copyObjectCommand = new CopyObjectCommand({
       Bucket: envConfig.S3_BUCKET, // Replace with your S3 bucket name
