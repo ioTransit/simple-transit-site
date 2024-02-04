@@ -12,6 +12,7 @@
     "start:mocks": "binode --require ./mocks -- @remix-run/serve:remix-serve ./build/index.js",
     "test": "vitest",
     "predeploy": "tsx ./app/predeploy.ts",
+    "enable-wal": "tsx ./drizzle/enable-wal.ts",
     "seed": "tsx ./drizzle/seed.ts",
     "gtfs": "tsx app/gtfs/index.ts",
     "db:push": "npx drizzle-kit push:sqlite --config=./drizzle/config.ts",
