@@ -28,7 +28,7 @@ RUN tar -C /usr/local/bin -xzf /tmp/litestream.tar.gz
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl sqlite3
- 
+
 # Install all node_modules, including dev dependencies
 FROM base as deps
 
