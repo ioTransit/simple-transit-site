@@ -10,7 +10,8 @@ async function predeploy() {
   const email = envConfig.ADMIN_EMAIL;
 
   // cleanup the existing database
-  await db.delete(user).where(eq(user.email, email));
+  const [_user] = await db.select().from(user).where(eq(user.email, email));
+  if (_user) return;
 
   const hashedPassword = await bcrypt.hash(envConfig.ADMIN_PASSWORD, 10);
 
