@@ -15,7 +15,7 @@
 
 # npx prisma migrate deploy
 ## Enables WAL Mode
-node ./drizzle/enable-wal.js
+tsx ./drizzle/enable-wal.ts
 
 npx concurrently "litestream replicate -config /etc/litestream.yml" "npm run start"
 # exec litestream replicate -exec "npm run start"
