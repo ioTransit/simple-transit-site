@@ -27,5 +27,5 @@ export async function backupS3Object(bucket: string, sourceKey: string, destinat
 }
 
 cron.schedule('* * * * *', () => {
-  backupS3Object(envConfig.S3_BUCKET, 'data.db', 'drizzle/data.db')
+  backupS3Object(envConfig.S3_BUCKET, 'data.db', '/drizzle/data.db')
 }) 
