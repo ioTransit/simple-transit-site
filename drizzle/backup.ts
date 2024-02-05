@@ -1,8 +1,8 @@
 
 import cron from 'node-cron';
 import { envConfig } from '~/config.server';
-import { S3Client, CopyObjectCommand } from '@aws-sdk/client-s3'
-
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import fs from 'fs'
 const s3Client = new S3Client({
   region: "us-east-1", // Replace with your AWS region
   credentials: {
@@ -12,14 +12,17 @@ const s3Client = new S3Client({
 });
 
 // Function to perform S3 object copy (backup)
-export async function backupS3Object(bucket: string, sourceKey: string, destinationKey: string) {
+export async function backupS3Object(bucket: string, filePath: string, destinationKey: string) {
   try {
-    const copyObjectCommand = new CopyObjectCommand({
-      Bucket: envConfig.S3_BUCKET, // Replace with your S3 bucket name
-      // CopySource: `/${bucket}/${sourceKey}`, // Source object key
-      CopySource: `drizzle/${sourceKey}`, // Source object key
-      Key: destinationKey, // Destination object key
+    const fileContent = fs.readFileSync(filePath);
+
+    // Create S3 PutObjectCommand with the specified prefix
+    const copyObjectCommand = new PutObjectCommand({
+      Bucket: bucket,
+      Key: destinationKey,
+      Body: fileContent,
     });
+
     const response = await s3Client.send(copyObjectCommand);
     console.log(`Backup successful. Copy operation response:`, response);
   } catch (error) {
