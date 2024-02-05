@@ -9,7 +9,6 @@ import { gtfsConfig, envConfig } from "../config.server";
 
 export const load = async () => {
   try {
-    console.log(envConfig);
     await importGtfs(gtfsConfig);
     await gtfsToHtml(gtfsConfig)
       .then(() => {

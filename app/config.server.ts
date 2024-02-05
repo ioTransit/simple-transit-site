@@ -7,7 +7,6 @@ const loadEnv = () => {
   try {
     // Path to the .env file
     const envFilePath = path.resolve(__dirname, ".env");
-    console.log(envFilePath);
 
     // Read the contents of the .env file
     const envFileContent = fs.readFileSync(envFilePath, "utf8");
@@ -20,7 +19,6 @@ const loadEnv = () => {
       const [key, value] = line.split("=");
       if (key && value)
         process.env[key.trim()] = value.trim().replaceAll('"', "");
-      console.log(key, value);
     });
   } catch {
     return;
@@ -29,7 +27,6 @@ const loadEnv = () => {
 
 const config = () => {
   loadEnv();
-  console.log(process.env);
   const _config = z
     .object({
       ADMIN_EMAIL: z.string(),
