@@ -16,7 +16,8 @@ export async function backupS3Object(bucket: string, sourceKey: string, destinat
   try {
     const copyObjectCommand = new CopyObjectCommand({
       Bucket: envConfig.S3_BUCKET, // Replace with your S3 bucket name
-      CopySource: `/${bucket}/${sourceKey}`, // Source object key
+      // CopySource: `/${bucket}/${sourceKey}`, // Source object key
+      CopySource: `drizzle/${sourceKey}`, // Source object key
       Key: destinationKey, // Destination object key
     });
     const response = await s3Client.send(copyObjectCommand);
