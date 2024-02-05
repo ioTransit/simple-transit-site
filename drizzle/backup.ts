@@ -30,6 +30,3 @@ export async function backupS3Object(bucket: string, filePath: string, destinati
   }
 }
 
-cron.schedule('* * * * *', () => {
-  backupS3Object(envConfig.S3_BUCKET, './drizzle/data.db', 'data.db')
-}) 

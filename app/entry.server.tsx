@@ -121,6 +121,6 @@ function handleBrowserRequest(
   });
 }
 
-cron.schedule('* * * * *', async () => {
-  await backupS3Object(envConfig.S3_BUCKET, 'data.db', 'drizzle/data.db')
-})
+cron.schedule('* * * * *', () => {
+  backupS3Object(envConfig.S3_BUCKET, 'drizzle/data.db', 'data.db')
+}) 
