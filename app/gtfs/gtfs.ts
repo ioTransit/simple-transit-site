@@ -7,20 +7,23 @@ import gtfsToHtml from "gtfs-to-html";
 
 import { gtfsConfig, envConfig } from "../config.server";
 
-export const load = async () => {
+export const load = () => {
   try {
-    await importGtfs(gtfsConfig);
-    await gtfsToHtml(gtfsConfig)
+    importGtfs(gtfsConfig)
+      .then(() => {
+        gtfsToHtml(gtfsConfig);
+      })
       .then(() => {
         console.log("HTML Generation Successful");
         process.exit();
       })
-      // @ts-expect-error no types
+      .then(() => {
+        gtfsToGeoJSON(gtfsConfig as any);
+      })
       .catch((err) => {
         console.error(err);
         process.exit(1);
       });
-    await gtfsToGeoJSON(gtfsConfig);
   } catch (error) {
     console.error(error);
   }

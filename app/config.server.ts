@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-
 import { z } from "zod";
 
 const loadEnv = () => {
@@ -18,6 +17,7 @@ const loadEnv = () => {
     envLines.forEach((line) => {
       const [key, value] = line.split("=");
       if (key && value)
+        // @ts-ignore idk
         process.env[key.trim()] = value.trim().replaceAll('"', "");
     });
   } catch {
@@ -37,7 +37,7 @@ const config = () => {
       GTFS_URL: z.string(),
       S3_BUCKET: z.string(),
       AWS_ACCESS_KEY_ID: z.string(),
-      AWS_SECRET_ACCESS_KEY: z.string()
+      AWS_SECRET_ACCESS_KEY: z.string(),
     })
     .parse(process.env);
   return _config;
