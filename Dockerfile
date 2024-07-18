@@ -1,5 +1,5 @@
 # base node image
-FROM node:18-bullseye-slim as base
+FROM node:20-bullseye-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
@@ -75,8 +75,8 @@ COPY scripts/run.sh /scripts/run.sh
 
 CMD [ "/scripts/run.sh" ]
 
-RUN npm run gtfs
-RUN npm run predeploy 
+# RUN npm run gtfs
+# RUN npm run predeploy 
 
 # Finally, build the production image with minimal footprint
 FROM base
