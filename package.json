@@ -1,12 +1,13 @@
 {
+  "type": "module",
   "name": "transit-agency-site-4f17",
   "private": true,
   "sideEffects": false,
   "scripts": {
     "gtfs": "tsx app/gtfs-load/index.ts",
     "build": "remix vite:build",
-    "dev": "remix vite:dev",
     "start": "remix-serve ./build/server/index.js",
+    "dev": "remix vite:dev",
     "dev:serve": "binode --require ./mocks -- @remix-run/serve:remix-serve ./build/index.js",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
