@@ -1,8 +1,8 @@
 import {
-  LinksFunction,
-  LoaderFunctionArgs,
   json,
   redirect,
+  type LinksFunction,
+  type LoaderFunctionArgs,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import bbox from "@turf/bbox";
@@ -11,21 +11,16 @@ import clsx from "clsx";
 import { eq } from "drizzle-orm";
 import concat from "lodash/concat";
 import groupBy from "lodash/groupBy";
-import mapboxCss from "mapbox-gl/dist/mapbox-gl.css";
+import mapboxCss from "mapbox-gl/dist/mapbox-gl.css?url";
 import { useEffect, useState } from "react";
-import Map, { // eslint-disable-line
-  CircleLayer,
-  Layer,
-  LineLayer,
-  Source,
-  useMap,
-} from "react-map-gl";
+import Map, { Layer, Source, useMap } from "react-map-gl"; // eslint-disable-line
 
 import { db } from "drizzle/config";
 import { routes } from "drizzle/schema";
 import { Button } from "~/components/ui/button";
-import { getDow, getFiles, getGeojson, getService } from "~/lib/utils";
+import { getFiles, getGeojson, getService } from "~/lib/utils";
 import { getDirections } from "~/models/directions.server";
+import { getDow } from "~/lib/utils.server";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: mapboxCss }];
@@ -42,8 +37,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   if (!_routes[0] || !_routes[0].routeShortName) return redirect("/");
   const files = getFiles(formattedDate, _routes[0].routeShortName);
-  const geojson = getGeojson(routeShortName);
-
+  const geojson = getGeojson(_routes[0].routeId);
   const bounds = geojson[0]
     ? bbox(
         lineString(
@@ -83,7 +77,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   });
 }
 
-const stopsStyle = (fileName: string): CircleLayer => {
+const stopsStyle = (fileName: string) => {
   return {
     id: `${fileName}-stops`,
     type: "circle",
@@ -94,7 +88,7 @@ const stopsStyle = (fileName: string): CircleLayer => {
   };
 };
 
-const routesStyle = (fileName: string): LineLayer => {
+const routesStyle = (fileName: string) => {
   return {
     id: `${fileName}-routes`,
     type: "line",
@@ -151,11 +145,14 @@ export default function RootRouteTemplate() {
               type="geojson"
             >
               <Layer
-                {...routesStyle(el.fileName)}
+                {...(routesStyle(el.fileName) as any)}
                 filter={["has", "route_id"]}
                 beforeId="road-label-small"
               />
-              <Layer {...stopsStyle(el.fileName)} filter={["has", "stop_id"]} />
+              <Layer
+                {...(stopsStyle(el.fileName) as any)}
+                filter={["has", "stop_id"]}
+              />
             </Source>
           ))}
         </Map>

@@ -3,16 +3,17 @@
  * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
  * For more information, see https://remix.run/docs/en/main/file-conventions/entry.server
  */
-import cron from 'node-cron'
+import cron from "node-cron";
 import { PassThrough } from "node:stream";
 
 import type { EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import isbot from "isbot";
+import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { backupS3Object } from 'drizzle/backup';
-import { envConfig } from './config.server';
+import { backupS3Object } from "drizzle/backup";
+import { envConfig } from "./config.server";
+import { load } from "./gtfs-load/gtfs-load";
 
 const ABORT_DELAY = 5_000;
 
@@ -24,17 +25,17 @@ export default function handleRequest(
 ) {
   return isbot(request.headers.get("user-agent"))
     ? handleBotRequest(
-      request,
-      responseStatusCode,
-      responseHeaders,
-      remixContext,
-    )
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext,
+      )
     : handleBrowserRequest(
-      request,
-      responseStatusCode,
-      responseHeaders,
-      remixContext,
-    );
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext,
+      );
 }
 
 function handleBotRequest(
@@ -120,7 +121,7 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
-cron.schedule('* * * * *', () => {
-  backupS3Object(envConfig.S3_BUCKET, 'drizzle/data.db', 'data.db')
-}) 
+load();
+cron.schedule("* * * * *", () => {
+  backupS3Object(envConfig.S3_BUCKET, "drizzle/data.db", "data.db");
+});

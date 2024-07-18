@@ -1,31 +1,67 @@
+// {
+//   "include": [
+//     "**/*.ts",
+//     "**/*.tsx",
+//     "**/.server/**/*.ts",
+//     "**/.server/**/*.tsx",
+//     "**/.client/**/*.ts",
+//     "**/.client/**/*.tsx",
+//     "vite.config.js",
+//     "vitest.config.js",
+//     "app/gtfs/index.ts",
+//     "app/gtfs/gtfs.ts"
+//   ],
+//   "compilerOptions": {
+//     "lib": ["DOM", "DOM.Iterable", "ES2022"],
+//     "types": ["@remix-run/node", "vite/client"],
+//     "isolatedModules": true,
+//     "esModuleInterop": true,
+//     "jsx": "react-jsx",
+//     "module": "NodeNext",
+//     "moduleResolution": "NodeNext",
+//     "resolveJsonModule": true,
+//     "target": "ES2022",
+//     "strict": true,
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "baseUrl": ".",
+//     "paths": {
+//       "~/*": ["./app/*"]
+//     },
+//
+//     // Vite takes care of building everything, not tsc.
+//     "noEmit": true
+//   }
+// }
 {
-  "exclude": ["./cypress", "./cypress.config.ts"],
-  "include": [
-    "remix.env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "app/gtfs.js",
-    "app/gtfs/index.js"
-  ],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2020"],
-    "types": ["vitest/globals"],
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "module": "NodeNext",
-    "resolveJsonModule": true,
-    "target": "ES2020",
-    "strict": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     },
-    "skipLibCheck": true,
+    // Enable latest features
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
 
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
   }
 }
